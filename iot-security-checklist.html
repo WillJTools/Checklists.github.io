@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WillJTools IoT Security Penetration Testing Checklist</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>IoT Security Penetration Testing Checklist</h1>
+        <nav>
+            <a href="index.html">Back to Home</a>
+        </nav>
+    </header>
+    <main>
+        <article>
+            <h2>Comprehensive IoT Security Checklist</h2>
+            <ul>
+                <li><input type="checkbox" id="device-identification"> <label for="device-identification"><strong>Device Identification:</strong> Catalog and identify all IoT devices within the network. Assess each device for known vulnerabilities using databases like CVE. (Example tools: Nmap, Fing)</label></li>
+                <li><input type="checkbox" id="firmware-analysis"> <label for="firmware-analysis"><strong>Firmware Analysis:</strong> Extract, analyze, and test device firmware for hidden backdoors, insecure cryptographic practices, and hardcoded credentials. (Example tools: Binwalk, Firmware Analysis Toolkit)</label></li>
+                <li><input type="checkbox" id="network-traffic-analysis"> <label for="network-traffic-analysis"><strong>Network Traffic Analysis:</strong> Monitor and analyze network traffic to/from IoT devices to detect anomalies or insecure protocols. (Example tools: Wireshark, Tcpdump)</label></li>
+                <li><input type="checkbox" id="authentication-tests"> <label for="authentication-tests"><strong>Authentication Tests:</strong> Test the strength and implementation of authentication mechanisms. Check for weak passwords, insecure password recovery processes, and session management. (Example tools: Hydra, Burp Suite)</label></li>
+                <li><input type="checkbox" id="api-security"> <label for="api-security"><strong>API Security:</strong> Test all APIs associated with IoT devices for common security issues such as SQL injection, XSS, and improper access controls. (Example tools: Postman, OWASP ZAP)</label></li>
+                <li><input type="checkbox" id="physical-security-tests"> <label for="physical-security-tests"><strong>Physical Security Tests:</strong> Assess the physical security of IoT devices. Check for easily accessible debug ports or unprotected USB interfaces. (Example tools: Multimeter, Screwdrivers)</label></li>
+                <li><input type="checkbox" id="wireless-security"> <label for="wireless-security"><strong>Wireless Security:</strong> Evaluate the security of wireless protocols used by IoT devices such as Wi-Fi, Zigbee, and Bluetooth. (Example tools: Aircrack-ng, Ubertooth)</label></li>
+                <li><input type="checkbox" id="cloud-interface-security"> <label for="cloud-interface-security"><strong>Cloud Interface Security:</strong> Test the security of any cloud services connected to IoT devices. Check for insecure data storage, inadequate user authentication, and lack of encryption. (Example tools: AWS Inspector, CloudSploit)</label></li>
+                <li><input type="checkbox" id="compliance-checks"> <label for="compliance-checks"><strong>Compliance Checks:</strong> Ensure that IoT devices and practices comply with relevant standards and regulations like GDPR, HIPAA, or CCPA depending on the use case. (Example tools: Custom compliance checklists)</label></li>
+                <li><input type="checkbox" id="penetration-testing"> <label for="penetration-testing"><strong>Penetration Testing:</strong> Conduct structured penetration tests on IoT ecosystems to identify potential pathways for exploitation. (Example tools: Metasploit, BeEF)</label></li>
+                <li><input type="checkbox" id="secure-boot"> <label for="secure-boot"><strong>Secure Boot Verification:</strong> Ensure that devices only boot with software signed by the manufacturer to prevent unauthorized firmware loading. (Example command: Use <code>chipsec</code> to verify secure boot configuration.)</label></li>
+                <li><input type="checkbox" id="encryption-at-rest"> <label for="encryption-at-rest"><strong>Encryption of Data at Rest:</strong> Verify that all sensitive data stored on the device is encrypted using robust encryption standards. (Tool suggestion: <code>dm-crypt</code> for disk encryption on Linux systems.)</label></li>
+                <li><input type="checkbox" id="secure-update-mechanism"> <label for="secure-update
+                <li><input type="checkbox" id="secure-update-mechanism"> <label for="secure-update-mechanism"><strong>Secure Firmware/Software Update Mechanisms:</strong> Assess the security of update mechanisms, including verification of update integrity and authenticity. (Example tools: Use <code>openssl</code> to verify digital signatures on firmware packages.)</label></li>
+                <li><input type="checkbox" id="default-credentials-test"> <label for="default-credentials-test"><strong>Default Credentials Test:</strong> Check devices for default usernames and passwords and ensure they are changed during initial setup. (Tool suggestion: <code>Hydra</code> or <code>Ncrack</code> to attempt login with default credentials.)</label></li>
+                <li><input type="checkbox" id="service-port-analysis"> <label for="service-port-analysis"><strong>Service and Port Analysis:</strong> Scan for unnecessary open ports and services that could present security risks. (Example command: <code>nmap -sV -p- device_ip</code> to identify open ports and services.)</label></li>
+                <li><input type="checkbox" id="iot-protocol-security"> <label for="iot-protocol-security"><strong>IoT Protocol Security:</strong> Evaluate the security of IoT-specific protocols such as MQTT and CoAP for vulnerabilities. (Tool suggestion: <code>Wireshark</code> to analyze protocol traffic and spot issues like lack of encryption.)</label></li>
+                <li><input type="checkbox" id="third-party-components-audit"> <label for="third-party-components-audit"><strong>Third-Party Components Audit:</strong> Audit third-party components used in IoT devices for known vulnerabilities. (Tool suggestion: <code>OWASP Dependency-Check</code> to scan software libraries for vulnerabilities.)</label></li>
+                <li><input type="checkbox" id="intrusion-detection-systems"> <label for="intrusion-detection-systems"><strong>Intrusion Detection Systems:</strong> Check for the presence of intrusion detection capabilities and test their effectiveness. (Example setup: Deploy a network IDS like <code>Snort</code> and simulate an attack to see if it gets detected.)</label></li>
+                <li><input type="checkbox" id="environmental-controls"> <label for="environmental-controls"><strong>Environmental Controls:</strong> Evaluate physical environmental controls that protect IoT devices from tampering or environmental damage. (Example check: Inspect physical setup for temperature controls, humidity sensors, etc.)</label></li>
+                <li><input type="checkbox" id="iot-network-segmentation"> <label for="iot-network-segmentation"><strong>IoT Network Segmentation:</strong> Ensure IoT devices are appropriately segmented from the main organizational network to limit the scope of potential intrusions. (Example strategy: Use VLANs or firewalls to segregate IoT device traffic from core business systems.)</label></li>
+                <li><input type="checkbox" id="supply-chain-security"> <label for="supply-chain-security"><strong>Supply Chain Security:</strong> Analyze the security of the IoT device supply chain to identify vulnerabilities from third-party suppliers and vendors. (Example strategy: Review and audit supplier security policies and incident history.)</label></li>
+                <li><input type="checkbox" id="user-education-training"> <label for="user-education-training"><strong>User Education and Training:</strong> Provide training for users on the secure usage of IoT devices, emphasizing the importance of security updates and password management. (Example strategy: Organize regular training sessions and send out security best practices newsletters.)</label></li>
+                </ul>
+            </article>
+        </main>
+        <footer>
+            <p Copyright 2024 WillJTools</p>
+        </footer>
+    </body>
+    </html>
+    
