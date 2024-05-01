@@ -13,12 +13,17 @@
     <main>
         <article>
             <h2>GraphQL API Checklist</h2>
-            <ol>
-                <li><strong>Schema Discovery:</strong> Tools: InQL Scanner, GraphQL Voyager. Use introspection to discover schema.</li>
-                <li><strong>Input Validation:</strong> Tools: Burp Suite, GraphQLmap. Command: Test for common injections.</li>
-                <li><strong>Rate Limiting:</strong> Tools: Burp Suite Intruder. Command: Test for DoS vulnerabilities.</li>
-                <li>More checklist items here...</li>
-            </ol>
+            <ul>
+                <li><input type="checkbox" id="schema-discovery"> <label for="schema-discovery"><strong>Schema Discovery and Analysis:</strong> Thoroughly explore the GraphQL schema to understand available queries, mutations, subscriptions, and types. Tools: InQL Scanner, GraphQL Voyager. Command: Use detailed introspection query.</label></li>
+                <li><input type="checkbox" id="introspection-testing"> <label for="introspection-testing"><strong>Testing for Introspection:</strong> Determine if the introspection feature is enabled, which can expose sensitive data. Tools: Burp Suite, custom scripts.</label></li>
+                <li><input type="checkbox" id="auth-testing"> <label for="auth-testing"><strong>Authentication and Authorization Testing:</strong> Identify flaws in authentication logic and authorization checks. Tools: Burp Suite, OWASP ZAP, Postman. Example: Manipulating JWT tokens to gain unauthorized access.</label></li>
+                <li><input type="checkbox" id="input-validation"> <label for="input-validation"><strong>Input Validation and Error Handling:</strong> Perform injection attacks like SQLi or XSS through inputs and analyze error messages for data leaks. Tools: GraphQLmap, Burp Suite.</label></li>
+                <li><input type="checkbox" id="query-mutation"> <label for="query-mutation"><strong>Query and Mutation Testing:</strong> Test for unexpected behaviors or unauthorized data access through complex queries and mutations. Tools: Custom scripts, Burp Suite.</label></li>
+                <li><input type="checkbox" id="batch-queries"> <label for="batch-queries"><strong>Batch Queries and Performance Limits:</strong> Identify performance issues or denial of service vulnerabilities through nested or batched queries. Tools: Custom performance testing scripts, Burp Suite Intruder.</label></li>
+                <li><input type="checkbox" id="config-security"> <label for="config-security"><strong>Configuration and Security Headers:</strong> Review security configurations, headers, and secure deployment practices. Tools: Nmap, curl, SSL Labs' SSL Test. Command: Check security headers using curl.</label></li>
+                <li><input type="checkbox" id="logging-monitoring"> <label for="logging-monitoring"><strong>Logging and Monitoring Evaluation:</strong> Ensure that API usage is adequately logged and monitored. Tools: ELK Stack, Splunk.</label></li>
+                <li><input type="checkbox" id="third-party-testing"> <label for="third-party-testing"><strong>Third-Party Dependency Testing:</strong> Identify vulnerabilities in third-party libraries or services. Tools: OWASP Dependency Check, Retire.js.</label></li>
+            </ul>
         </article>
     </main>
     <footer>
