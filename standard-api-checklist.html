@@ -13,12 +13,18 @@
     <main>
         <article>
             <h2>Standard API Checklist</h2>
-            <ol>
-                <li><strong>Information Gathering:</strong> Identify endpoints and methods. Tools: Postman, Swagger, Burp Suite.</li>
-                <li><strong>Authentication Testing:</strong> Tools: Burp Suite, OWASP ZAP. Command: Test authentication mechanisms.</li>
-                <li><strong>Authorization Testing:</strong> Tools: Burp Suite. Command: Access control checks.</li>
-                <li>More checklist items here...</li>
-            </ol>
+            <ul>
+                <li><input type="checkbox" id="info-gathering"> <label for="info-gathering"><strong>Information Gathering:</strong> Identify the target API endpoints, methods, and data structures. Tools: Postman, Swagger, Burp Suite, curl. Command: <code>curl -i -X GET 'http://api.example.com/v1/endpoints' -H 'Authorization: Bearer {token}'</code></label></li>
+                <li><input type="checkbox" id="auth-testing"> <label for="auth-testing"><strong>Authentication Testing:</strong> Test for vulnerabilities in authentication mechanisms. Tools: Burp Suite, OWASP ZAP. Techniques: Attempt to bypass authentication, test weak password policies, inspect token/session management.</label></li>
+                <li><input type="checkbox" id="authz-testing"> <label for="authz-testing"><strong>Authorization Testing:</strong> Check if it's possible to access or modify other user's resources. Tools: Burp Suite, custom scripts. Command: <code>GET /api/v1/users/2/data HTTP/1.1 Host: example.com Authorization: Bearer {user1_token}</code></label></li>
+                <li><input type="checkbox" id="session-mgmt"> <label for="session-mgmt"><strong>Session Management:</strong> Evaluate the security of session tokens, cookies, and other mechanisms. Tools: Burp Suite, OWASP ZAP.</label></li>
+                <li><input type="checkbox" id="input-validation"> <label for="input-validation"><strong>Input Validation:</strong> Identify injection flaws, XSS, and other input-related vulnerabilities. Tools: SQLMap, Burp Suite, custom scripts. Example: <code>POST /api/v1/login HTTP/1.1 Host: example.com Content-Type: application/json {"user":"admin' OR '1'='1","pass":"password"}</code></label></li>
+                <li><input type="checkbox" id="rate-limiting"> <label for="rate-limiting"><strong>Rate Limiting and Resource Consumption:</strong> Test for DoS vulnerabilities through API throttling and resource limits. Tools: Burp Suite Intruder, custom scripts.</label></li>
+                <li><input type="checkbox" id="data-encryption"> <label for="data-encryption"><strong>Data Encryption:</strong> Ensure data in transit and at rest is properly encrypted. Tools: Burp Suite, OpenSSL, Wireshark. Example: Use Burp Suite to intercept requests and inspect encryption.</label></li>
+                <li><input type="checkbox" id="config-testing"> <label for="config-testing"><strong>Configuration and Deployment Management Testing:</strong> Identify misconfigurations, unnecessary HTTP methods, verbose error messages, and outdated servers. Tools: Nmap, Nikto, Burp Suite. Command: <code>OPTIONS / HTTP/1.1 Host: example.com</code></label></li>
+                <li><input type="checkbox" id="logic-vulns"> <label for="logic-vulns"><strong>Business Logic Vulnerabilities:</strong> Test for flaws in application logic that could be exploited. Tools: Custom scripts, manual testing.</label></li>
+                <li><input type="checkbox" id="logging-monitoring"> <label for="logging-monitoring"><strong>Logging and Monitoring:</strong> Ensure that logging and monitoring are sufficient to detect and alert on malicious activity. Tools: ELK Stack, Splunk. Command: Review logs for suspicious activity, ensure alerts are configured.</label></li>
+            </ul>
         </article>
     </main>
     <footer>
