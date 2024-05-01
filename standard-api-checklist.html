@@ -8,11 +8,11 @@
 </head>
 <body>
     <header>
-        <h1>Checklist</h1>
+        <h1>WillJTools Standard API Penetration Testing Checklist</h1>
     </header>
     <main>
         <article>
-            <h2>Advanced API Testing Checklist</h2>
+            <h2>Checklist</h2>
             <ul>
                 <li><input type="checkbox" id="endpoint-analysis"> <label for="endpoint-analysis"><strong>Endpoint Security Analysis:</strong> Conduct a detailed analysis of each API endpoint against common and uncommon security vulnerabilities. This includes testing for HTTP method vulnerabilities, parameter tampering, and injection attacks. (Tools: Burp Suite, Postman, OWASP ZAP; Example command: <code>POST /api/v1/update HTTP/1.1 Host: example.com Content-Type: application/json {"data": "test' OR '1'='1"}</code>)</label></li>
                 <li><input type="checkbox" id="authentication-mechanism"> <label for="authentication-mechanism"><strong>Advanced Authentication Testing:</strong> Examine the robustness of authentication tokens and mechanisms (OAuth, JWT, API keys) against extraction and misuse. (Tools: Burp Suite, OWASP ZAP; Techniques: Test for weak JWT implementation by altering the signature algorithm to 'none' to see if the server accepts unsigned tokens, Example command: <code>curl -H "Authorization: Bearer eyJhbGciOiJub25lIn0...{}"</code>)</label></li>
