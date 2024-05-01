@@ -14,20 +14,27 @@
         <article>
             <h2>GraphQL API Checklist</h2>
             <ul>
-                <li><input type="checkbox" id="schema-discovery"> <label for="schema-discovery"><strong>Schema Discovery and Analysis:</strong> Thoroughly explore the GraphQL schema to understand available queries, mutations, subscriptions, and types. Tools: InQL Scanner, GraphQL Voyager. Command: Use detailed introspection query.</label></li>
-                <li><input type="checkbox" id="introspection-testing"> <label for="introspection-testing"><strong>Testing for Introspection:</strong> Determine if the introspection feature is enabled, which can expose sensitive data. Tools: Burp Suite, custom scripts.</label></li>
-                <li><input type="checkbox" id="auth-testing"> <label for="auth-testing"><strong>Authentication and Authorization Testing:</strong> Identify flaws in authentication logic and authorization checks. Tools: Burp Suite, OWASP ZAP, Postman. Example: Manipulating JWT tokens to gain unauthorized access.</label></li>
-                <li><input type="checkbox" id="input-validation"> <label for="input-validation"><strong>Input Validation and Error Handling:</strong> Perform injection attacks like SQLi or XSS through inputs and analyze error messages for data leaks. Tools: GraphQLmap, Burp Suite.</label></li>
-                <li><input type="checkbox" id="query-mutation"> <label for="query-mutation"><strong>Query and Mutation Testing:</strong> Test for unexpected behaviors or unauthorized data access through complex queries and mutations. Tools: Custom scripts, Burp Suite.</label></li>
-                <li><input type="checkbox" id="batch-queries"> <label for="batch-queries"><strong>Batch Queries and Performance Limits:</strong> Identify performance issues or denial of service vulnerabilities through nested or batched queries. Tools: Custom performance testing scripts, Burp Suite Intruder.</label></li>
-                <li><input type="checkbox" id="config-security"> <label for="config-security"><strong>Configuration and Security Headers:</strong> Review security configurations, headers, and secure deployment practices. Tools: Nmap, curl, SSL Labs' SSL Test. Command: Check security headers using curl.</label></li>
-                <li><input type="checkbox" id="logging-monitoring"> <label for="logging-monitoring"><strong>Logging and Monitoring Evaluation:</strong> Ensure that API usage is adequately logged and monitored. Tools: ELK Stack, Splunk.</label></li>
-                <li><input type="checkbox" id="third-party-testing"> <label for="third-party-testing"><strong>Third-Party Dependency Testing:</strong> Identify vulnerabilities in third-party libraries or services. Tools: OWASP Dependency Check, Retire.js.</label></li>
+                <li><input type="checkbox" id="schema-discovery"> <label for="schema-discovery"><strong>Schema Discovery and Analysis:</strong> Utilize introspection to discover and analyze available queries, mutations, and types. Tools: InQL Scanner, GraphQL Voyager.</label></li>
+                <li><input type="checkbox" id="introspection-testing"> <label for="introspection-testing"><strong>Testing for Introspection:</strong> Ensure introspection queries are disabled in production to protect the schema details. Tools: Burp Suite, custom scripts.</label></li>
+                <li><input type="checkbox" id="auth-testing"> <label for="auth-testing"><strong>Authentication and Authorization Testing:</strong> Verify security mechanisms to ensure only authorized access to resources. Examine JWT token usage and OAuth implementations. Tools: Burp Suite, OWASP ZAP.</label></li>
+                <li><input type="checkbox" id="batch-query-testing"> <label for="batch-query-testing"><strong>Batch Query Testing:</strong> Test for potential denial of service (DoS) through batched queries and deeply nested queries. Tools: Custom scripts, GraphQL Fuzzer.</label></li>
+                <li><input type="checkbox" id="query-depth-limit"> <label for="query-depth-limit"><strong>Query Depth Limit:</strong> Verify that depth limiting is in place to prevent overly complex queries from overloading the server. Tools: Burp Suite, custom middleware.</label></li>
+                <li><input type="checkbox" id="field-suggestion"> <label for="field-suggestion"><strong>Field Suggestion Testing:</strong> Ensure that automatic field suggestions are disabled to prevent information leakage. Tools: Manual testing, Burp Suite.</label></li>
+                <li><input type="checkbox" id="alias-overloading"> <label for="alias-overloading"><strong>Alias Overloading:</strong> Check for abuse of aliases to perform unauthorized actions or to bypass security controls. Tools: Burp Suite, GraphQLmap.</label></li>
+                <li><input type="checkbox" id="mutation-testing"> <label for="mutation-testing"><strong>Mutation Testing:</strong> Test mutation operations for security issues, ensuring they properly check permissions before executing changes. Tools: Burp Suite, OWASP ZAP.</label></li>
+                <li><input type="checkbox" id="error-handling"> <label for="error-handling"><strong>Error Handling:</strong> Analyze error messages to ensure they do not disclose sensitive information about the GraphQL schema or underlying systems. Tools: Manual testing, Burp Suite.</label></li>
+                <li><input type="checkbox" id="rate-limiting"> <label for="rate-limiting"><strong>Rate Limiting:</strong> Evaluate the implementation of rate limiting to mitigate abuse scenarios. Tools: Burp Suite Intruder, custom rate limit testers.</label></li>
+                <li><input type="checkbox" id="subscription-security"> <label for="subscription-security"><strong>Subscription Security:</strong> Verify the security of subscription operations, ensuring they are restricted to authorized users only. Tools: Manual testing, custom scripts.</label></li>
+                <li><input type="checkbox" id="input-validation"> <label for="input-validation"><strong>Input Validation:</strong> Test for common vulnerabilities like SQL injection, XSS through inputs in GraphQL queries. Tools: GraphQLmap, Burp Suite.</label></li>
+                <li><input type="checkbox" id="cost-analysis"> <label for="cost-analysis"><strong>Query Cost Analysis:</strong> Perform cost analysis on queries to ensure they don't lead to resource exhaustion. Tools: Apollo Engine, custom scripts.</label></li>
+                <li><input type="checkbox" id="compliance-checks"> <label for="compliance-checks"><strong>Compliance Checks:</strong> Ensure that GraphQL operations comply with regulatory requirements such as GDPR. Tools: Manual review, compliance software.</label></li>
+                <li><input type="checkbox" id="documentation-review"> <label for="documentation-review"><strong>Documentation Review:</strong> Review documentation for accuracy and unintentional exposure of sensitive details. Tools: Manual review.</label></li>
+                <li><input type="checkbox" id="third-party-libraries"> <label for="third-party-libraries"><strong>Third-Party Libraries:</strong> Examine all third-party libraries for known vulnerabilities. Tools: OWASP Dependency Check, Retire.js.</label></li>
             </ul>
         </article>
     </main>
     <footer>
-        <p>Copyright 2024 WillJTools</p>
+        <p Copyright 2024 WillJTools</p>
     </footer>
 </body>
 </html>
