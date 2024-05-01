@@ -8,11 +8,11 @@
 </head>
 <body>
     <header>
-        <h1>GraphQL API Penetration Testing Checklist</h1>
+        <h1>WillJTools GraphQL API Penetration Testing Checklist</h1>
     </header>
     <main>
         <article>
-            <h2>GraphQL API Checklist</h2>
+            <h2>Checklist</h2>
             <ul>
                 <li><input type="checkbox" id="schema-discovery"> <label for="schema-discovery"><strong>Schema Discovery and Analysis:</strong> Utilize introspection to discover and analyze available queries, mutations, and types. (Tools: InQL Scanner, GraphQL Voyager; Example command: <code>{ __schema { types { name, fields { name, type { name } } } }}</code> to gather comprehensive schema information)</label></li>
                 <li><input type="checkbox" id="introspection-testing"> <label for="introspection-testing"><strong>Testing for Introspection:</strong> Ensure introspection queries are disabled in production to protect schema details. (Tools: Burp Suite, custom scripts; Example command: Attempt introspection with <code>{__schema{types{name}}}</code> and ensure it returns an error in production environments.)</label></li>
