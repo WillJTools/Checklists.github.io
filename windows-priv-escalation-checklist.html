@@ -8,14 +8,14 @@
 </head>
 <body>
     <header>
-        <h1>Windows Privilege Escalation Checklist</h1>
+        <h1>WillJTools Windows Privilege Escalation Checklist</h1>
         <nav>
             <a href="index.html">Back to Home</a>
         </nav>
     </header>
     <main>
         <article>
-            <h2>Detailed Checklist for Windows Privilege Escalation</h2>
+            <h2>Checklist</h2>
             <ul>
                 <li><input type="checkbox" id="exploiting-wmi-command-execution"><label for="exploiting-wmi-command-execution"><strong>Exploiting WMI Command Execution:</strong> Identify and exploit WMI command execution capabilities for privilege escalation. (Example: Execute arbitrary commands or scripts using WMI methods or classes to gain elevated privileges. Command: <code>wmic /node:"target" process call create "cmd.exe /c malicious.exe"</code>)</label></li>
                 <li><input type="checkbox" id="exploiting-winlogon-hijacking"><label for="exploiting-winlogon-hijacking"><strong>Exploiting Winlogon Hijacking:</strong> Identify and exploit vulnerabilities in the Windows Logon (Winlogon) process for privilege escalation. (Example: Modify Winlogon registry settings or binaries to execute code during system startup with elevated privileges. Command: <code>reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\sethc.exe" /v "Debugger" /t REG_SZ /d "cmd.exe"</code>)</label></li>
