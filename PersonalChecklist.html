@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WillJTools AI Penetration Testing Checklist</title>
+</head>
+<body>
+    <div id="login">
+        <h2>Password Required</h2>
+        <input type="password" id="password" placeholder="Enter password">
+        <button onclick="checkPassword()">Submit</button>
+    </div>
+    <div id="content" style="display:none;">
+        <header>
+            <h1>WillJTools AI Penetration Testing Checklist</h1>
+            <nav>
+                <a href="index.html">Back to Home</a>
+            </nav>
+        </header>
+        <main>
+            <article>
+                <h2>Checklist</h2>
+                <ul>
+                    <li><input type="checkbox" id="input-validation"> <label for="input-validation"><strong>Input Validation:</strong> Test the LLM for vulnerabilities to injection attacks through input vectors. Examine how the model processes unexpected or malicious input. (Example: Attempt to inject malicious scripts or unexpected commands to see how the LLM handles them.)</label></li>
+                    <li><input type="checkbox" id="data-leakage"> <label for="data-leakage"><strong>Data Leakage:</strong> Evaluate the model for potential data leakage issues where sensitive information included in the training data might be inadvertently revealed. (Example: Query the model with specific prompts to check for unexpected outputs that could contain sensitive data.)</label></li>
+                    <li><input type="checkbox" id="authentication-authorization"> <label for="authentication-authorization"><strong>Authentication and Authorization:</strong> Test the mechanisms protecting the access to the LLM, ensuring that only authorized requests are processed. (Example: Bypass authentication controls to access the LLM's API or frontend.)</label></li>
+                    <li><input type="checkbox" id="model-poisoning"> <label for="model-poisoning"><strong>Model Poisoning:</strong> Assess the model's resilience against training-time attacks that aim to corrupt its output. (Example: Introduce subtle manipulations in the training dataset to see if they can alter the model’s behavior predictably.)</label></li>
+                    <li><input type="checkbox" id="model-stealing"> <label for="model-stealing"><strong>Model Stealing:</strong> Evaluate the risk and ease of reconstructing the model by querying it extensively. (Example: Use a series of systematic queries to infer the model's architecture and weights.)</label></li>
+                    <li><input type="checkbox" id="output-manipulation"> <label for="output-manipulation"><strong>Output Manipulation:</strong> Test for adversarial examples that could cause the model to output incorrect or harmful responses. (Example: Craft inputs that are designed to exploit the model’s weaknesses and trigger faulty outputs.)</label></li>
+                </ul>
+            </article>
+        </main>
+    </div>
+    <script>
+        function checkPassword() {
+            const password = document.getElementById('password').value;
+            if (password === 'cjkaldfjkla;gjdkla;gjdkla;jgids;agjix2j0t492t092490') {
+                document.getElementById('login').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+            } else {
+                alert('Incorrect password');
+            }
+        }
+    </script>
+</body>
+</html>
