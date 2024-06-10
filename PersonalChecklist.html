@@ -251,6 +251,105 @@
                     </ul>
                 </label></li>
             </ul>
+            
+            <h3>Unconventional Testing</h3>
+            <ul>
+                <li><input type="checkbox" id="response-splitting"> <label for="response-splitting">HTTP Response Splitting
+                    <ul>
+                        <li>curl -v "http://example.com/page?param=%0d%0aContent-Length:%200%0d%0a%0d%0aHTTP/1.1%20200%20OK%0d%0aContent-Type:%20text/html%0d%0aContent-Length:%2013%0d%0a%0d%0aInjected Content"</li>
+                    </ul>
+                </label></li>
+                <li><input type="checkbox" id="subresource-integrity-bypass"> <label for="subresource-integrity-bypass">Subresource Integrity (SRI) Bypass
+                    <ul>
+                        <li>Inject a script with a matching hash but with malicious content.</li>
+                    </ul>
+                </label></li>
+                <li><input type="checkbox" id="javascript-prototype-pollution"> <label for="javascript-prototype-pollution">JavaScript Prototype Pollution
+                    <ul>
+                        <li>node -e "var a = {}; Object.prototype.polluted = 'yes'; console.log(a.polluted);" </li>
+                    </ul>
+                </label></li>
+                <li><input type="checkbox" id="browser-based-side-channel"> <label for="browser-based-side-channel">Browser-Based Side-Channel Attacks
+                    <ul>
+                        <li>Test timing differences in response times using a high-resolution timer.</li>
+                    </ul>
+                </label></li>
+                <li><input type="checkbox" id="web-cache-deception"> <label for="web-cache-deception">Web Cache Deception
+                    <ul>
+                        <li>curl -I "http://example.com/path/to/resource.php/fake.css"</li>
+                    </ul>
+                </label></li>
+                <li><input type="checkbox" id="smb-relay-attacks"> <label for="smb-relay-attacks">SMB Relay Attacks
+                    <ul>
+                        <li>Responder: sudo responder -I eth0 -rdw</li>
+                    </ul>
+                </label></li>
+                <li><input type="checkbox" id="pdf-based-exploits"> <label for="pdf-based-exploits">PDF-Based Exploits
+                    <ul>
+                        <li>pdfid.py example.pdf</li>
+                    </ul>
+                </label></li>
+                <li><input type="checkbox" id="font-parsing-vulnerabilities"> <label for="font-parsing-vulnerabilities">Font Parsing Vulnerabilities
+                    <ul>
+                        <li>Test various fonts in a web page to identify rendering issues.</li>
+                    </ul>
+                </label></li>
+                <li><input type="checkbox" id="dns-tunneling"> <label for="dns-tunneling">DNS Tunneling
+                    <ul>
+                        <li>iodine -f -r tunnel.example.com 10.0.0.1</li>
+                    </ul>
+                </label></li>
+                <li><input type="checkbox" id="dnssec-downgrade-attacks"> <label for="dnssec-downgrade-attacks">DNSSEC Downgrade Attacks
+                    <ul>
+                        <li>Test DNS responses to see if they fallback to insecure configurations.</li>
+                    </ul>
+                </label></li>
+                <li><input type="checkbox" id="shadow-dom-exploits"> <label for="shadow-dom-exploits">Shadow DOM Exploits
+                    <ul>
+                        <li>Inspect and manipulate the Shadow DOM elements for potential vulnerabilities.</li>
+                    </ul>
+                </label></li>
+                <li><input type="checkbox" id="persistent-client-side"> <label for="persistent-client-side">Persistent Client-Side Storage Manipulation
+                    <ul>
+                        <li>Use localStorage and sessionStorage to store and manipulate data.</li>
+                    </ul>
+                </label></li>
+                <li><input type="checkbox" id="svg-file-attacks"> <label for="svg-file-attacks">SVG File Attacks
+                    <ul>
+                        <li>Inspect SVG files for embedded JavaScript or external resource loading.</li>
+                    </ul>
+                </label></li>
+                <li><input type="checkbox" id="timing-attack"> <label for="timing-attack">Timing Attacks on Login Pages
+                    <ul>
+                        <li>time curl -X POST -d "username=admin&password=wrongpassword" http://example.com/login</li>
+                    </ul>
+                </label></li>
+                <li><input type="checkbox" id="font-rendering"> <label for="font-rendering">Font Rendering Exploits
+                    <ul>
+                        <li>Test custom fonts to identify potential vulnerabilities in rendering engines.</li>
+                    </ul>
+                </label></li>
+                <li><input type="checkbox" id="image-tragging"> <label for="image-tragging">Image Dragging Exploits
+                    <ul>
+                        <li>Test dragging and dropping of images to find potential exploits.</li>
+                    </ul>
+                </label></li>
+                <li><input type="checkbox" id="unauthenticated-file"> <label for="unauthenticated-file">Unauthenticated File Upload
+                    <ul>
+                        <li>curl -X POST -F "file=@payload.php" http://example.com/upload</li>
+                    </ul>
+                </label></li>
+                <li><input type="checkbox" id="service-worker"> <label for="service-worker">Service Worker Manipulation
+                    <ul>
+                        <li>Inspect and manipulate service workers to test for vulnerabilities.</li>
+                    </ul>
+                </label></li>
+                <li><input type="checkbox" id="clipboard-manipulation"> <label for="clipboard-manipulation">Clipboard Manipulation
+                    <ul>
+                        <li>Test clipboard interactions to identify potential security issues.</li>
+                    </ul>
+                </label></li>
+            </ul>
         </article>
     </main>
 </body>
