@@ -3,45 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WillJTools AI Penetration Testing Checklist</title>
+    <title>WillJTools Penetration Testing Checklist</title>
 </head>
 <body>
-    <div id="login">
-        <h2>Password Required</h2>
-        <input type="password" id="password" placeholder="Enter password">
-        <button onclick="checkPassword()">Submit</button>
-    </div>
-    <div id="content" style="display:none;">
-        <header>
-            <h1>WillJTools AI Penetration Testing Checklist</h1>
-            <nav>
-                <a href="index.html">Back to Home</a>
-            </nav>
-        </header>
-        <main>
-            <article>
-                <h2>Checklist</h2>
-                <ul>
-                    <li><input type="checkbox" id="input-validation"> <label for="input-validation"><strong>Input Validation:</strong> Test the LLM for vulnerabilities to injection attacks through input vectors. Examine how the model processes unexpected or malicious input. (Example: Attempt to inject malicious scripts or unexpected commands to see how the LLM handles them.)</label></li>
-                    <li><input type="checkbox" id="data-leakage"> <label for="data-leakage"><strong>Data Leakage:</strong> Evaluate the model for potential data leakage issues where sensitive information included in the training data might be inadvertently revealed. (Example: Query the model with specific prompts to check for unexpected outputs that could contain sensitive data.)</label></li>
-                    <li><input type="checkbox" id="authentication-authorization"> <label for="authentication-authorization"><strong>Authentication and Authorization:</strong> Test the mechanisms protecting the access to the LLM, ensuring that only authorized requests are processed. (Example: Bypass authentication controls to access the LLM's API or frontend.)</label></li>
-                    <li><input type="checkbox" id="model-poisoning"> <label for="model-poisoning"><strong>Model Poisoning:</strong> Assess the model's resilience against training-time attacks that aim to corrupt its output. (Example: Introduce subtle manipulations in the training dataset to see if they can alter the model’s behavior predictably.)</label></li>
-                    <li><input type="checkbox" id="model-stealing"> <label for="model-stealing"><strong>Model Stealing:</strong> Evaluate the risk and ease of reconstructing the model by querying it extensively. (Example: Use a series of systematic queries to infer the model's architecture and weights.)</label></li>
-                    <li><input type="checkbox" id="output-manipulation"> <label for="output-manipulation"><strong>Output Manipulation:</strong> Test for adversarial examples that could cause the model to output incorrect or harmful responses. (Example: Craft inputs that are designed to exploit the model’s weaknesses and trigger faulty outputs.)</label></li>
-                </ul>
-            </article>
-        </main>
-    </div>
-    <script>
-        function checkPassword() {
-            const password = document.getElementById('password').value;
-            if (password === 'cjkaldfjkla;gjdkla;gjdkla;jgids;agjix2j0t492t092490') {
-                document.getElementById('login').style.display = 'none';
-                document.getElementById('content').style.display = 'block';
-            } else {
-                alert('Incorrect password');
-            }
-        }
-    </script>
+    <header>
+        <h1>WillJTools Penetration Testing Checklist</h1>
+        <nav>
+            <a href="index.html">Back to Home</a>
+        </nav>
+    </header>
+    <main>
+        <article>
+            <h2>Checklist</h2>
+            <h3>OSINT (Open Source Intelligence)</h3>
+            <ul>
+                <li>Subdomain Enumeration
+                    <ul>
+                        <li>amass enum -active -brute -o testoutput.txt -d test.com</li>
+                        <li>sublist3r -d example.com -o subdomains.txt</li>
+                    </ul>
+                </li>
+                <li>Link Finder
+                    <ul>
+                        <li>(Be Sure to cd into /LinkFinder) python3 linkfinder.py -i https://test.com -o results.html</li>
+                    </ul>
+                </li>
+                <li>Metadata Extraction
+                    <ul>
+                        <li>exiftool example.jpg</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Network Scanning</h3>
+            <ul>
+                <li>Comprehensive Nmap Scan
+                    <ul>
+                        <li>nmap -p- -sS -sU -T4 -A -v -Pn --script vuln X.X.X.X</li>
+                    </ul>
+                </li>
+                <li>Nmap Aggressive Scan with OS and Service Detection
+                    <ul>
+                        <li>nmap -A -O -sV X.X.X.X</li>
+                    </ul>
+                </li>
+                <li>Nmap Full TCP and UDP Scan with OS and Service Detection
+                    <ul>
+                        <li>nmap -sS -sU -p- -A -O X.X.X.X</li>
+                    </ul>
+                </li>
+                <li>Nmap Scan Top Ports with Vulnerability Scripts
+                    <ul>
+                        <li>nmap --top-ports 20 --script vuln X.X.X.X</li>
+                    </ul>
+                </li>
+                <li>Nmap Comprehensive Scan with Default Safe Scripts and Intense Scan Options
+                    <ul>
+                        <li>nmap -sC -A -T4 X.X.X.X</li>
+                    </ul>
+                </li>
+                <li>SSL Certificate Information
+                    <ul>
+                        <li>sslscan example.com</li>
+                    </ul>
+                </li>
+                <li>DNS Zone Transfer
+                    <ul>
+                        <li>dig axfr @ns1.example.com example.com</li>
+                    </ul>
+                </li>
+                <li>DNS Rebinding Attack
+                    <ul>
+                        <li>rebind -t example.com</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Vulnerability Scanning</h3>
+            <ul>
+                <li>Reconnaissance with FinalRecon
+                    <ul>
+                        <li>finalrecon --full https://test.com</li>
+                    </ul>
+                </li>
+                <li>Vulnerability Scanning with OpenVAS
+                    <ul>
+                        <li>openvas -u username -w password --target example.com</li>
+                    </ul>
+                </li>
+                <li>Automated Security Testing with Nikto
+                    <ul>
+                        <li>nikto -h https://example.com</li>
+                    </ul>
+                </li>
+                <li>HTTP Smuggling Detection
+                    <ul>
+                        <li>smuggler.py -u https://example.com</li>
+                    </ul>
+                </li>
+                <li>Content Security Policy Bypass
+                    <ul>
+                        <li>csp_evaluator --url https://example.com</li>
+                    </ul>
+                </li>
+                <li>HTTP Header Security Check
+                    <ul>
+                        <li>python3 testssl.py --header https://example.com</li>
+                    </ul>
+                </li>
+                <li>Web Application Firewall Detection
+                    <ul>
+                        <li>wafw00f http://example.com</li>
+                    </ul>
+                </li>
+                <li>Security Misconfiguration Check with Lynis
+                    <ul>
+                        <li>lynis audit system -Q</li>
+                    </ul>
+                </li>
+                <li>Dependency Check for Vulnerable Libraries
+                    <ul>
+                        <li>dependency-check --project example --scan /path/to/project</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Injection Testing</h3>
+            <ul>
+                <li>Web Application Fuzzing
+                    <ul>
+                        <li>ffuf -w /home/user5482/Documents/payloads/common.txt:FUZ -u https://test.com/FUZZ -fs 0 -mc 200</li>
+                    </ul>
+                </li>
+                <li>SQL Injection Testing
+                    <ul>
+                        <li>sqlmap -u "http://www.example.com/page.php?id=1"</li>
+                    </ul>
+                </li>
+                <li>Command Injection Testing
+                    <ul>
+                        <li>commix --url="http://example.com/index.php?id=1" --batch</li>
+                    </ul>
+                </li>
+                <li>Open Redirect Testing
+                    <ul>
+                        <li>curl -v "http://example.com/redirect?url=http://attacker.com"</li>
+                    </ul>
+                </li>
+                <li>File Inclusion Testing
+                    <ul>
+                        <li>curl "http://example.com/index.php?page=../../../../etc/passwd"</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>API and Web Application Testing</h3>
+            <ul>
+                <li>Parameter Discovery
+                    <ul>
+                        <li>arjun -u http://test.com</li>
+                        <li>arjun -u http://test.com -o new.json</li>
+                    </ul>
+                </li>
+                <li>XSS Scanning
+                    <ul>
+                        <li>xsser -u "http://example.com/index.php?id=1" --auto</li>
+                        <li>xsser -u "http://example.com/index.php?id=1" --auto -o results.txt</li>
+                    </ul>
+                </li>
+                <li>API Testing with Postman
+                    <ul>
+                        <li>newman run collection.json -e environment.json</li>
+                    </ul>
+                </li>
+                <li>GraphQL Endpoint Testing
+                    <ul>
+                        <li>graphqlmap -u http://example.com/graphql -H 'Authorization: Bearer <token>'</li>
+                    </ul>
+                </li>
+                <li>Hidden Parameter Discovery
+                    <ul>
+                        <li>parameth -u https://example.com</li>
+                    </ul>
+                </li>
+                <li>HTTP Parameter Pollution
+                    <ul>
+                        <li>curl -X GET "http://example.com/index.php?param1=value1&param1=value2"</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Authentication and Session Testing</h3>
+            <ul>
+                <li>Brute Force Login
+                    <ul>
+                        <li>hydra -l bob -P /usr/share/wordlists/rockyou.txt -f X.X.X.X http-get /protected/</li>
+                    </ul>
+                </li>
+                <li>JWT Token Cracking
+                    <ul>
+                        <li>jwtcrack eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Mobile and Client-Side Security</h3>
+            <ul>
+                <li>Mobile App Security Testing
+                    <ul>
+                        <li>mobSF -f example.apk</li>
+                    </ul>
+                </li>
+                <li>JavaScript File Analysis
+                    <ul>
+                        <li>jsparser -u https://example.com -o results.txt</li>
+                    </ul>
+                </li>
+                <li>Cross-Origin Resource Sharing (CORS) Testing
+                    <ul>
+                        <li>python3 corsy.py -u https://example.com</li>
+                    </ul>
+                </li>
+                <li>WebSockets Security Testing
+                    <ul>
+                        <li>wstest -t https://example.com/socket</li>
+                    </ul>
+                </li>
+            </ul>
+
+                       <h3>Special Case Testing</h3>
+            <ul>
+                <li>Subdomain Takeover
+                    <ul>
+                        <li>subjack -w subdomains.txt -t 20 -timeout 30 -ssl -c /path/to/fingerprints.json -v</li>
+                    </ul>
+                </li>
+                <li>Email Spoofing Testing
+                    <ul>
+                        <li>sendEmail -f sender@example.com -t target@example.com -u "Test" -m "This is a test email" -s smtp.example.com</li>
+                    </ul>
+                </li>
+                <li>HTTP/2 Security Testing
+                    <ul>
+                        <li>h2spec -p 443 -h example.com</li>
+                    </ul>
+                </li>
+            </ul>
+        </article>
+    </main>
 </body>
 </html>
