@@ -1,82 +1,82 @@
-/* Reset some default styling and set base styles for the body */
-body {
-    font-family: Arial, sans-serif; /* Ensures a clean, readable font is used */
-    background-color: #f4f4f4; /* Light grey background for slight contrast */
-    color: #333; /* Dark grey text for readability */
-    margin: 0; /* Removes default margin */
-    padding: 0; /* Removes default padding */
-    display: flex; /* Enables flexible box layout */
-    flex-direction: column; /* Stacks elements vertically */
-    min-height: 100vh; /* Ensures the minimum height is the full viewport height */
+/* Reset default margin and padding for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* Header styles for consistent branding and navigation */
+/* Global styles for body */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header styles */
 header {
-    background-color: #000; /* Black background for the header */
-    color: #fff; /* White text for contrast */
-    padding: 20px 10px; /* Padding around the content in the header */
-    text-align: center; /* Centers the title text */
-    position: relative; /* Needed for positioning elements inside */
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
 }
 
 header nav {
-    position: absolute; /* Allows precise positioning */
-    top: 20px; /* Distance from the top of the header */
-    right: 10px; /* Distance from the right of the header */
+    margin-top: 10px;
 }
 
-header a {
-    color: #fff; /* Ensures text is white */
-    text-decoration: none; /* No underline */
-    background-color: #007bff; /* Blue background for buttons */
-    padding: 8px 15px; /* Padding inside the buttons */
-    border-radius: 5px; /* Rounded corners for the buttons */
+header nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
 }
 
-header a:hover {
-    background-color: #0056b3; /* Darker blue on hover for visual feedback */
+header nav a:hover {
+    background-color: #555;
 }
 
-/* Main content area styling */
+/* Main content area styles */
 main {
-    flex: 1; /* Takes up the remaining space in the flex container */
-    display: flex; /* Enables flexible box layout */
-    justify-content: center; /* Centers content horizontally */
-    align-items: center; /* Centers content vertically */
-    padding: 20px; /* Space around the content inside main */
+    padding: 20px;
 }
 
-/* Content area specific styling */
 .content {
-    width: 80%; /* Uses 80% of the width of its container */
-    max-width: 1200px; /* Maximum width to prevent overly wide lines of text */
-    background-color: #fff; /* White background for content area */
-    padding: 20px; /* Padding inside the content area */
-    box-shadow: 0 0 10px rgba(0,0,0,0.2); /* Subtle shadow for depth */
-    border-radius: 5px; /* Rounded corners for the content box */
+    width: 90%; /* Adjust as needed */
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 ul {
-    list-style-type: none; /* Removes default bullet points */
-    margin: 0; /* Removes default margin */
-    padding: 0; /* Removes default padding */
+    list-style-type: none;
+    padding: 0;
 }
 
 li {
-    background-color: #f4f4f4; /* Light grey background for each list item */
-    border-bottom: 1px solid #ccc; /* Subtle separator for items */
-    padding: 15px; /* Padding inside each list item */
-    margin-bottom: 10px; /* Space between list items */
-    word-wrap: break-word; /* Ensures text does not overflow */
+    background-color: #f4f4f4;
+    margin-bottom: 10px;
+    padding: 15px;
+    word-wrap: break-word;
 }
 
-/* Footer styling for copyright notice */
+label {
+    display: block;
+    cursor: pointer;
+}
+
+/* Footer styles */
 footer {
-    text-align: center; /* Center the text within the footer */
-    padding: 10px 0; /* Padding above and below the text */
-    background-color: #222; /* Very dark grey background */
-    color: #fff; /* White text for readability */
-    position: fixed; /* Keeps the footer at the bottom */
-    bottom: 0; /* Aligns to the bottom of the viewport */
-    width: 100%; /* Full width of the viewport */
+    text-align: center;
+    padding: 10px 0;
+    background-color: #333;
+    color: #fff;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
 }
