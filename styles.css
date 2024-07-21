@@ -5,8 +5,9 @@ body {
     margin: 0;
     padding: 0;
     position: relative;
-    min-height: 100vh; /* Ensure the footer stays at the bottom on short pages */
-    padding-bottom: 40px; /* Space for footer */
+    min-height: 100vh; /* Ensure footer is at the bottom */
+    display: flex;
+    flex-direction: column;
 }
 
 header {
@@ -17,20 +18,31 @@ header {
 }
 
 main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns */
+    gap: 10px; /* Space between buttons */
     padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
 }
 
-.checklist {
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    width: calc(33% - 40px); /* Three items per row with spacing */
-    margin: 20px;
+.checklist a {
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
-    text-align: center;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    height: 100px; /* Fixed height for uniformity */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.checklist a:hover {
+    background-color: #0056b3;
 }
 
 footer {
@@ -38,41 +50,11 @@ footer {
     color: #000;
     text-align: center;
     padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
     border-top: 1px solid #ccc;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    padding: 8px;
-    border-bottom: 1px solid #ccc;
-}
-
-a {
-    color: #004d99;
-    text-decoration: none;
-    display: block;
-    margin: 10px 0;
-}
-
-a:hover {
-    color: #002766;
 }
 
 @media (max-width: 768px) {
     main {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .checklist {
-        width: 90%; /* Full width on smaller screens */
-        margin: 10px 0;
+        grid-template-columns: 1fr; /* Single column on small screens */
     }
 }
