@@ -4,8 +4,9 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
-    position: relative; /* Ensures the page content flows correctly */
-    padding-bottom: 30px; /* Ensure this is enough to see the footer without scrolling */
+    position: relative;
+    min-height: 100vh; /* Ensure the footer stays at the bottom on short pages */
+    padding-bottom: 40px; /* Space for footer */
 }
 
 header {
@@ -13,38 +14,35 @@ header {
     color: #fff;
     padding: 20px 10px;
     text-align: center;
-    position: relative;
-}
-
-header nav {
-    position: absolute;
-    top: 20px;
-    left: 10px;
 }
 
 main {
     padding: 20px;
-    margin: auto;
-    margin-top: 30px; /* Increase separation from the header */
-    max-width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.checklist {
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    position: relative; /* Make sure the main content has relative positioning */
-    padding-bottom: 30px; /* Make room for the footer */
+    width: calc(33% - 40px); /* Three items per row with spacing */
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
 }
 
 footer {
-    background-color: #fff; /* Change the background to white */
-    color: #000; /* Change the font color to black */
+    background-color: #fff;
+    color: #000;
     text-align: center;
-    padding: 5px 0; /* Adjusted padding if necessary */
+    padding: 10px 0;
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 30px; /* Keep the reduced height */
-    border-top: 1px solid #ccc; /* Add a subtle line to differentiate the footer from the content */
+    border-top: 1px solid #ccc;
 }
-
 
 ul {
     list-style-type: none;
@@ -52,41 +50,29 @@ ul {
 }
 
 li {
-    border-bottom: 1px solid #ccc;
     padding: 8px;
-    margin-bottom: 5px;
-}
-
-input[type="checkbox"] {
-    margin-right: 10px;
+    border-bottom: 1px solid #ccc;
 }
 
 a {
-    color: white;
+    color: #004d99;
     text-decoration: none;
-    background-color: #007bff;
-    padding: 8px 15px;
-    border-radius: 5px;
-    display: inline-block;
-    margin-top: 10px;
+    display: block;
+    margin: 10px 0;
 }
 
 a:hover {
-    background-color: #0056b3;
+    color: #002766;
 }
 
 @media (max-width: 768px) {
-    header {
-        text-align: center;
-    }
-
-    header nav {
-        position: static;
-        margin-top: 10px;
-    }
-
     main {
-        width: 90%;
-        padding: 20px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .checklist {
+        width: 90%; /* Full width on smaller screens */
+        margin: 10px 0;
     }
 }
