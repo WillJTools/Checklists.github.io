@@ -5,7 +5,7 @@ body {
     margin: 0;
     padding: 0;
     position: relative; /* Ensures the page content flows correctly */
-    padding-bottom: 50px; /* Add bottom padding to ensure content is above the footer */
+    padding-bottom: 30px; /* Ensure this is enough to see the footer without scrolling */
 }
 
 header {
@@ -25,22 +25,23 @@ header nav {
 main {
     padding: 20px;
     margin: auto;
+    margin-top: 30px; /* Increase separation from the header */
     max-width: 800px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     position: relative; /* Make sure the main content has relative positioning */
-    padding-bottom: 60px; /* Make room for the footer */
+    padding-bottom: 30px; /* Make room for the footer */
 }
 
 footer {
     background-color: #222;
     color: #fff;
     text-align: center;
-    padding: 10px 0;
+    padding: 5px 0; /* Reduced padding to make the footer less dramatic */
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 50px; /* Define a specific height for the footer */
+    height: 30px; /* Reduced height */
 }
 
 ul {
