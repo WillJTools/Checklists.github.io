@@ -34,15 +34,17 @@ main {
 }
 
 footer {
-    background-color: #222;
-    color: #fff;
+    background-color: #fff; /* Change the background to white */
+    color: #000; /* Change the font color to black */
     text-align: center;
-    padding: 5px 0; /* Reduced padding to make the footer less dramatic */
+    padding: 5px 0; /* Adjusted padding if necessary */
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 30px; /* Reduced height */
+    height: 30px; /* Keep the reduced height */
+    border-top: 1px solid #ccc; /* Add a subtle line to differentiate the footer from the content */
 }
+
 
 ul {
     list-style-type: none;
