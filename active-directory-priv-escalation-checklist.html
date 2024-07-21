@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Directory Privilege Escalation Checklist</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Active Directory Privilege Escalation Checklist</h1>
+    </header>
+    <main>
+        <article>
+            <h2>Detailed Steps for AD Privilege Escalation</h2>
+            <ul>
+                <li><input type="checkbox" id="enumerate"> <label for="enumerate">Enumerate active directory details with AD enumeration tools like PowerView or BloodHound.</label></li>
+                <li><input type="checkbox" id="kerbrute"> <label for="kerbrute">Perform username enumeration with Kerbrute to find valid AD accounts.</label></li>
+                <li><input type="checkbox" id="spraying"> <label for="spraying">Conduct password spraying to discover weak passwords using tools like Hydra or CrackMapExec.</label></li>
+                <li><input type="checkbox" id="bloodhound-analysis"> <label for="bloodhound-analysis">Utilize BloodHound for detailed ACL analysis and attack path discovery.</label></li>
+                <li><input type="checkbox" id="mimikatz"> <label for="mimikatz">Extract credentials from memory using Mimikatz.</label></li>
+                <li><input type="checkbox" id="golden"> <label for="golden">Create and use Golden Tickets for persistent access.</label></li>
+                <li><input type="checkbox" id="silver"> <label for="silver">Generate Silver Tickets to access specific services.</label></li>
+                <li><input type="checkbox" id="dcsync"> <label for="dcsync">Use DCSync to pull password hashes from a domain controller.</label></li>
+                <li><input type="checkbox" id="sidhistory"> <label for="sidhistory">Exploit SID History Injection vulnerabilities.</label></li>
+                <li><input type="checkbox" id="gpo"> <label for="gpo">Abuse misconfigured Group Policies to escalate privileges.</label></li>
+                <li><input type="checkbox" id="trusts"> <label for="trusts">Exploit trust relationships between domains.</label></li>
+                <li><input type="checkbox" id="sessions"> <label for="sessions">Hijack sessions using pass-the-ticket attacks.</label></li>
+                <li><input type="checkbox" id="shadow"> <label for="shadow">Extract credentials from NTDS.dit using tools like NTDSUtil.</label></li>
+                <li><input type="checkbox" id="clearlogs"> <label for="clearlogs">Clear event logs to hide malicious activity.</label></li>
+                <li><input type="checkbox" id="monitor"> <label for="monitor">Monitor network traffic for additional intelligence gathering.</label></li>
+                <li><input type="checkbox" id="forensics"> <label for="forensics">Conduct forensic analysis on compromised systems to understand better security measures.</label></li>
+                <li><input type="checkbox" id="backdoor"> <label for="backdoor">Install backdoors for re-entry after initial compromise.</label></li>
+                <li><input type="checkbox" id="documentation"> <label for="documentation">Document all findings and steps taken for escalation for audit and training purposes.</label></li>
+                <li><input type="checkbox" id="debrief"> <label for="debrief">Prepare a detailed debrief for the security team to discuss findings and future prevention strategies.</label></li>
+                <li><input type="checkbox" id="improvements"> <label for="improvements">Suggest security improvements based on the exploitation outcomes.</label></li>
+            </ul>
+        </article>
+    </main>
+    <footer>
+        <p>Copyright 2024 WillJTools</p>
+    </footer>
+</body>
+</html>
