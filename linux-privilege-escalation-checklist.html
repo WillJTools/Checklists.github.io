@@ -30,6 +30,16 @@
                 <li><input type="checkbox"> <strong>Check CPU Info:</strong> <code>lscpu</code></li>
                 <li><input type="checkbox"> <strong>Check Memory Usage:</strong> <code>free -h</code></li>
                 <li><input type="checkbox"> <strong>Mounted File Systems:</strong> <code>df -h</code></li>
+                <li><input type="checkbox"> <strong>Find World-Writable Files:</strong> <code>find / -perm -222 -type f 2>/dev/null</code></li>
+                <li><input type="checkbox"> <strong>Find Writable Configuration Files:</strong> <code>find /etc -type f -perm -222 2>/dev/null</code></li>
+                <li><input type="checkbox"> <strong>Find Writable Scripts:</strong> <code>find / -type f -name "*.sh" -perm -222 2>/dev/null</code></li>
+                <li><input type="checkbox"> <strong>Find Files Owned by Root with SUID/SGID:</strong> <code>find / -uid 0 -perm -4000 -o -perm -2000 2>/dev/null</code></li>
+                <li><input type="checkbox"> <strong>Find Recent Files Modified by Root:</strong> <code>find / -user root -mtime -1 2>/dev/null</code></li>
+                <li><input type="checkbox"> <strong>Find Large Files (>100MB):</strong> <code>find / -type f -size +100M 2>/dev/null</code></li>
+                <li><input type="checkbox"> <strong>Find Hidden Files:</strong> <code>find / -type f -name ".*" 2>/dev/null</code></li>
+                <li><input type="checkbox"> <strong>Find Files with Specific Extensions:</strong> <code>find / -type f \( -name "*.conf" -o -name "*.log" \) 2>/dev/null</code></li>
+                <li><input type="checkbox"> <strong>Find Files with Specific Content:</strong> <code>find / -type f -exec grep -l "password" {} \; 2>/dev/null</code></li>
+                <li><input type="checkbox"> <strong>Find Directories with Sticky Bit:</strong> <code>find / -type d -perm -1000 2>/dev/null</code></li>
             </ul>
             
             <!-- USER & PERMISSIONS ENUMERATION -->
