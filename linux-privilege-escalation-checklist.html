@@ -38,6 +38,11 @@
                 <li><input type="checkbox"> <strong>Who is logged in?</strong> <code>w; who; last</code></li>
                 <li><input type="checkbox"> <strong>Who has sudo access?</strong> <code>sudo -l</code></li>
                 <li><input type="checkbox"> <strong>Check user groups:</strong> <code>groups</code></li>
+                <li><input type="checkbox"> <strong>Finding files that allow us to run as if we have higher Privileges than the current user:</strong> <code>find / -perm -u=s -type f 2>/dev/null</code></li>
+                <li><input type="checkbox"> <strong>Find executable files:</strong> <code>	find / -perm a=x </code></li>
+                <li><input type="checkbox"> <strong>GID Binaries:</strong> <code>find / -perm -2000 -type f 2>/dev/null</code></li>
+                <li><input type="checkbox"> <strong>Find world-writeable folders:</strong> <code>find / -perm -222 -type d 2>/dev/null</code></li>
+                <li><input type="checkbox"> <strong>Find files with the 777 permissions:</strong> <code>find / -type f -perm 0777</code></li>
                 <li><input type="checkbox"> <strong>List All Users:</strong> <code>cat /etc/passwd</code></li>
                 <li><input type="checkbox"> <strong>List All Groups:</strong> <code>cat /etc/group</code></li>
                 <li><input type="checkbox"> <strong>Check Password Policies:</strong> <code>cat /etc/login.defs</code></li>
