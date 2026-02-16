@@ -1,228 +1,151 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WillJTools Mobile App Testing Checklist</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1>WillJTools Mobile App Testing Checklist</h1>
-        <nav>
-            <a href="index.html">Back to Home</a>
-        </nav>
-    </header>
+<h2>Checklist</h2>
 
-    <main>
-        <article>
-            <h2>Checklist</h2>
+<h3>🔌 Step 1 – Device Connection (Every Session Start)</h3>
+<ul>
+    <li><input type="checkbox"> Verify ADB Device Connection
+        <ul>
+            <li>adb kill-server</li>
+            <li>adb start-server</li>
+            <li>adb devices -l</li>
+        </ul>
+    </li>
+    <li><input type="checkbox"> Confirm Device Details
+        <ul>
+            <li>adb shell getprop ro.product.model</li>
+            <li>adb shell getprop ro.build.version.release</li>
+        </ul>
+    </li>
+    <li><input type="checkbox"> Confirm Root (Magisk)
+        <ul>
+            <li>adb shell</li>
+            <li>su -c id</li>
+        </ul>
+    </li>
+</ul>
 
-            <h3>Device & Environment Setup</h3>
-            <ul>
-                <li><input type="checkbox" id="adb-devices"> <label for="adb-devices">Verify Device Connection
-                    <ul>
-                        <li>adb devices -l</li>
-                        <li>adb shell getprop ro.product.model</li>
-                        <li>adb shell getprop ro.build.version.release</li>
-                    </ul>
-                </label></li>
-                <li><input type="checkbox" id="root-check"> <label for="root-check">Root Check (Magisk)
-                    <ul>
-                        <li>adb shell</li>
-                        <li>su -c id</li>
-                    </ul>
-                </label></li>
-                <li><input type="checkbox" id="list-packages"> <label for="list-packages">List Installed Packages
-                    <ul>
-                        <li>adb shell pm list packages | grep target</li>
-                    </ul>
-                </label></li>
-            </ul>
+<h3>📱 Step 2 – Confirm Target App Running</h3>
+<ul>
+    <li><input type="checkbox"> Launch App Manually on Device</li>
+    <li><input type="checkbox"> Get PID
+        <ul>
+            <li>adb shell pidof com.openai.chatgpt</li>
+            <li>adb shell ps -A | grep chatgpt</li>
+        </ul>
+    </li>
+    <li><input type="checkbox"> Monitor Live Logs (Optional)
+        <ul>
+            <li>adb logcat --pid=$(adb shell pidof com.openai.chatgpt)</li>
+        </ul>
+    </li>
+</ul>
 
-            <h3>APK Extraction & Static Analysis</h3>
-            <ul>
-                <li><input type="checkbox" id="get-apk-path"> <label for="get-apk-path">Get APK Path
-                    <ul>
-                        <li>adb shell pm path com.example.target</li>
-                    </ul>
-                </label></li>
-                <li><input type="checkbox" id="pull-apk"> <label for="pull-apk">Pull APK from Device
-                    <ul>
-                        <li>adb pull /data/app/com.example.target/base.apk ./target.apk</li>
-                    </ul>
-                </label></li>
-                <li><input type="checkbox" id="aapt-info"> <label for="aapt-info">Extract Metadata & Manifest
-                    <ul>
-                        <li>aapt dump badging target.apk | head -n 20</li>
-                        <li>aapt dump xmltree target.apk AndroidManifest.xml | head -n 50</li>
-                    </ul>
-                </label></li>
-                <li><input type="checkbox" id="jadx-decompile"> <label for="jadx-decompile">Decompile with JADX
-                    <ul>
-                        <li>jadx-gui ~/path/to/the/base.apk &</li>
-                        <li>jadx-gui target.apk</li>
-                    </ul>
-                </label></li>
-                <li><input type="checkbox" id="apktool-decompile"> <label for="apktool-decompile">Decompile with Apktool
-                    <ul>
-                        <li>apktool d -f -o apktool-output target.apk</li>
-                        <li>apktool b apktool-output -o rebuilt.apk</li>
-                    </ul>
-                </label></li>
-                <li><input type="checkbox" id="search-keys"> <label for="search-keys">Search for Keys & Secrets
-                    <ul>
-                        <li>rg -n "api_key|Authorization|token" jadx-output</li>
-                        <li>strings target.apk | grep "https://"</li>
-                    </ul>
-                </label></li>
-            </ul>
+<h3>📦 Step 3 – APK Extraction (Static Analysis Phase)</h3>
+<ul>
+    <li><input type="checkbox"> Get APK Path
+        <ul>
+            <li>adb shell pm path com.openai.chatgpt</li>
+        </ul>
+    </li>
+    <li><input type="checkbox"> Pull APK
+        <ul>
+            <li>adb pull $(adb shell pm path com.openai.chatgpt | sed 's/package://') ./chatgpt.apk</li>
+        </ul>
+    </li>
+    <li><input type="checkbox"> Decompile
+        <ul>
+            <li>jadx -d jadx-output chatgpt.apk</li>
+            <li>apktool d -f -o apktool-output chatgpt.apk</li>
+        </ul>
+    </li>
+    <li><input type="checkbox"> Search for Secrets & Networking
+        <ul>
+            <li>rg -n "Authorization|token|api_key|CertificatePinner" jadx-output</li>
+            <li>rg -n "network_security_config" apktool-output</li>
+        </ul>
+    </li>
+</ul>
 
-            <h3>App Data Extraction</h3>
-            <ul>
-                <li><input type="checkbox" id="extract-data"> <label for="extract-data">Extract App Data (Root)
-                    <ul>
-                        <li>adb shell su -c "cp -r /data/data/com.example.target /sdcard/target-data"</li>
-                        <li>adb pull /sdcard/target-data ./data</li>
-                    </ul>
-                </label></li>
-                <li><input type="checkbox" id="run-as"> <label for="run-as">Access Debuggable App Data
-                    <ul>
-                        <li>adb shell run-as com.example.target ls -la /data/data/com.example.target</li>
-                    </ul>
-                </label></li>
-                <li><input type="checkbox" id="shared-prefs"> <label for="shared-prefs">Extract Shared Preferences
-                    <ul>
-                        <li>adb shell su -c "cat /data/data/com.example.target/shared_prefs/*.xml"</li>
-                    </ul>
-                </label></li>
-                <li><input type="checkbox" id="pull-db"> <label for="pull-db">Pull SQLite Databases
-                    <ul>
-                        <li>adb shell su -c "cp /data/data/com.example.target/databases/*.db /sdcard/"</li>
-                        <li>adb pull /sdcard/*.db ./databases/</li>
-                        <li>sqlite3 app.db ".tables"</li>
-                    </ul>
-                </label></li>
-            </ul>
+<h3>🌐 Step 4 – Network Interception Setup</h3>
+<ul>
+    <li><input type="checkbox"> Confirm Proxy Settings
+        <ul>
+            <li>adb shell settings get global http_proxy</li>
+        </ul>
+    </li>
+    <li><input type="checkbox"> Set Proxy via ADB
+        <ul>
+            <li>adb reverse tcp:8080 tcp:8080</li>
+            <li>adb shell settings put global http_proxy 127.0.0.1:8080</li>
+        </ul>
+    </li>
+    <li><input type="checkbox"> Install Burp CA (If Needed)</li>
+    <li><input type="checkbox"> Test HTTPS Traffic in Burp</li>
+</ul>
 
-            <h3>Frida Instrumentation</h3>
-            <ul>
-                <li><input type="checkbox" id="push-frida"> <label for="push-frida">Push & Start Frida Server
-                    <ul>
-                        <li>adb push frida-server /data/local/tmp/</li>
-                        <li>adb shell su -c "chmod 755 /data/local/tmp/frida-server"</li>
-                        <li>adb shell su -c "/data/local/tmp/frida-server &"</li>
-                        <li>frida-ps -Uai</li>
-                    </ul>
-                </label></li>
-                <li><input type="checkbox" id="frida-attach"> <label for="frida-attach">Attach to Process
-                    <ul>
-                        <li>frida -U -n com.example.target</li>
-                        <li>frida -U -f com.example.target -l myhook.js --no-pause</li>
-                    </ul>
-                </label></li>
-                <li><input type="checkbox" id="frida-trace"> <label for="frida-trace">Dynamic Method Tracing
-                    <ul>
-                        <li>frida-trace -U -i "java.*" -p $(frida-ps -U | grep target | awk '{print $1}')</li>
-                    </ul>
-                </label></li>
-            </ul>
+<h3>🧪 Step 5 – Certificate Pinning Check</h3>
+<ul>
+    <li><input type="checkbox"> Static Search for Pinning
+        <ul>
+            <li>rg -n "CertificatePinner|TrustManager|HostnameVerifier" jadx-output</li>
+        </ul>
+    </li>
+    <li><input type="checkbox"> Runtime TLS Monitoring
+        <ul>
+            <li>adb logcat | grep -i "ssl\|tls\|pinning\|certificate"</li>
+        </ul>
+    </li>
+</ul>
 
-            <h3>Network Interception</h3>
-            <ul>
-                <li><input type="checkbox" id="adb-reverse"> <label for="adb-reverse">Setup Burp Proxy via ADB
-                    <ul>
-                        <li>adb reverse tcp:8080 tcp:8080</li>
-                        <li>adb shell settings put global http_proxy 127.0.0.1:8080</li>
-                    </ul>
-                </label></li>
-                <li><input type="checkbox" id="wifi-proxy"> <label for="wifi-proxy">Setup Proxy over Wi-Fi
-                    <ul>
-                        <li>Configure device Wi-Fi proxy: host=192.168.x.x port=8080</li>
-                    </ul>
-                </label></li>
-                <li><input type="checkbox" id="install-burp-ca"> <label for="install-burp-ca">Install Burp Certificate (Root)
-                    <ul>
-                        <li>openssl x509 -inform PEM -in burp.pem -subject_hash_old -noout</li>
-                        <li>cp burp.pem [HASH].0</li>
-                        <li>adb push [HASH].0 /system/etc/security/cacerts/</li>
-                        <li>adb shell su -c "chmod 644 /system/etc/security/cacerts/[HASH].0"</li>
-                        <li>adb reboot</li>
-                    </ul>
-                </label></li>
-                <li><input type="checkbox" id="tcpdump"> <label for="tcpdump">Capture Traffic with Tcpdump
-                    <ul>
-                        <li>adb push tcpdump /data/local/tmp/</li>
-                        <li>adb shell su -c "/data/local/tmp/tcpdump -i any -s 0 -w /sdcard/capture.pcap"</li>
-                        <li>adb pull /sdcard/capture.pcap ./capture.pcap</li>
-                    </ul>
-                </label></li>
-            </ul>
+<h3>📂 Step 6 – App Data Extraction (Root Required)</h3>
+<ul>
+    <li><input type="checkbox"> Dump App Data
+        <ul>
+            <li>adb shell su -c "cp -r /data/data/com.openai.chatgpt /sdcard/chatgpt-data"</li>
+            <li>adb pull /sdcard/chatgpt-data ./data</li>
+        </ul>
+    </li>
+    <li><input type="checkbox"> Inspect Shared Preferences
+        <ul>
+            <li>adb shell su -c "cat /data/data/com.openai.chatgpt/shared_prefs/*.xml"</li>
+        </ul>
+    </li>
+    <li><input type="checkbox"> Pull Databases
+        <ul>
+            <li>adb shell su -c "cp /data/data/com.openai.chatgpt/databases/*.db /sdcard/"</li>
+            <li>adb pull /sdcard/*.db ./databases/</li>
+        </ul>
+    </li>
+</ul>
 
-            <h3>Certificate Pinning Checks</h3>
-            <ul>
-                <li><input type="checkbox" id="static-pinning"> <label for="static-pinning">Static Search for Pinning Code
-                    <ul>
-                        <li>rg -n "CertificatePinner|TrustManager|HostnameVerifier" jadx-output</li>
-                    </ul>
-                </label></li>
-                <li><input type="checkbox" id="logcat-ssl"> <label for="logcat-ssl">Monitor TLS/SSL Errors
-                    <ul>
-                        <li>adb logcat | grep -i "ssl|tls|pinning|certificate"</li>
-                    </ul>
-                </label></li>
-            </ul>
+<h3>📊 Step 7 – Native Library Inspection</h3>
+<ul>
+    <li><input type="checkbox"> Inspect .so Files
+        <ul>
+            <li>unzip -l chatgpt.apk | grep ".so"</li>
+            <li>strings lib/arm64-v8a/*.so | grep "https"</li>
+        </ul>
+    </li>
+</ul>
 
-            <h3>Native Library Analysis</h3>
-            <ul>
-                <li><input type="checkbox" id="native-libs"> <label for="native-libs">Inspect .so Libraries
-                    <ul>
-                        <li>unzip -l target.apk | grep ".so"</li>
-                        <li>readelf -h lib/arm64-v8a/libtarget.so</li>
-                        <li>nm -D lib/arm64-v8a/libtarget.so | head -n 50</li>
-                    </ul>
-                </label></li>
-                <li><input type="checkbox" id="native-strings"> <label for="native-strings">Search Strings in Native Code
-                    <ul>
-                        <li>strings lib/arm64-v8a/libtarget.so | grep "http"</li>
-                    </ul>
-                </label></li>
-            </ul>
+<h3>🧹 Step 8 – Post-Test Cleanup</h3>
+<ul>
+    <li><input type="checkbox"> Remove Proxy
+        <ul>
+            <li>adb shell settings put global http_proxy :0</li>
+        </ul>
+    </li>
+    <li><input type="checkbox"> Flush IPTables (If Used)
+        <ul>
+            <li>adb shell su -c "iptables -t nat -F"</li>
+        </ul>
+    </li>
+</ul>
 
-            <h3>Post-Test Cleanup</h3>
-            <ul>
-                <li><input type="checkbox" id="remove-proxy"> <label for="remove-proxy">Remove Proxy Settings
-                    <ul>
-                        <li>adb shell settings put global http_proxy :0</li>
-                    </ul>
-                </label></li>
-                <li><input type="checkbox" id="flush-iptables"> <label for="flush-iptables">Flush IPTables Rules
-                    <ul>
-                        <li>adb shell su -c "iptables -t nat -F"</li>
-                    </ul>
-                </label></li>
-                <li><input type="checkbox" id="kill-frida"> <label for="kill-frida">Stop Frida Server
-                    <ul>
-                        <li>adb shell su -c "pkill frida-server"</li>
-                    </ul>
-                </label></li>
-                <li><input type="checkbox" id="remove-temp"> <label for="remove-temp">Delete Temporary Files
-                    <ul>
-                        <li>adb shell su -c "rm /data/local/tmp/frida-server /sdcard/*.db /sdcard/capture.pcap"</li>
-                    </ul>
-                </label></li>
-            </ul>
-
-            <h3>Quick 1-Line Summary (Pre-Engagement Run)</h3>
-            <ul>
-                <li><input type="checkbox" id="quick-run"> <label for="quick-run">ADB → APK → Jadx → Frida → Burp Workflow
-                    <ul>
-                        <li>adb devices -l && adb shell su -c id && adb shell pm path com.example.target && adb pull $(adb shell pm path com.example.target | sed 's/package://') ./target.apk && jadx -d jadx-out target.apk && adb push frida-server /data/local/tmp/ && adb shell su -c /data/local/tmp/frida-server & && frida -U -f com.example.target -l myhook.js --no-pause</li>
-                    </ul>
-                </label></li>
-            </ul>
-
-        </article>
-    </main>
-</body>
-</html>
+<h3>⚡ Rapid Engagement Workflow</h3>
+<ul>
+    <li><input type="checkbox"> Quick Start Command
+        <ul>
+            <li>adb devices -l && adb shell su -c id && adb shell pidof com.openai.chatgpt</li>
+        </ul>
+    </li>
+</ul>
